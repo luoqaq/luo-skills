@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>投研助手 · 策略中心</title>
+<style>
+  :root {
+    --paper: #faf8f4;
+    --ink: #1c1a17;
+    --ink-2: #57534a;
+    --ink-3: #96907f;
+    --rule: rgba(28,26,23,0.14);
+    --accent: #b3342a;
+    --up: #c23024;
+    --down: #1e7d4f;
+    --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+    --sans: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+  /* 刊头 */
+  .masthead { display: flex; align-items: baseline; gap: 32px; padding: 20px 40px 16px; border-bottom: 1px solid var(--ink); }
+  .brand { font-family: var(--serif); font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
+  .brand span { font-family: var(--sans); font-size: 11px; font-weight: 400; color: var(--ink-3); margin-left: 10px; letter-spacing: 0.06em; }
+  .nav { display: flex; gap: 22px; }
+  .nav a { color: var(--ink-2); text-decoration: none; font-size: 13px; }
+  .nav a.active { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+  .masthead .date { margin-left: auto; color: var(--ink-3); font-size: 12px; }
+
+  .page { padding: 28px 40px; max-width: 1280px; }
+
+  /* 导语区 */
+  .lede { display: grid; grid-template-columns: 7fr 4fr; gap: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+  .lede h1 { font-family: var(--serif); font-size: 44px; font-weight: 700; line-height: 1.1; }
+  .lede h1 em { font-style: normal; color: var(--accent); }
+  .lede .summary { font-size: 15px; line-height: 1.9; color: var(--ink-2); align-self: end; padding-bottom: 4px; }
+  .lede .summary b { color: var(--ink); font-weight: 600; }
+
+  /* 正文双栏 */
+  .columns { display: grid; grid-template-columns: 7fr 4fr; gap: 40px; padding-top: 24px; }
+  .sec-no { font-family: var(--serif); color: var(--accent); font-size: 13px; font-weight: 700; margin-right: 8px; }
+  h2 { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; padding-bottom: 10px; border-bottom: 1px solid var(--ink); margin-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; color: var(--ink-3); font-weight: 400; letter-spacing: 0.08em; padding: 10px 8px 8px; border-bottom: 1px solid var(--rule); }
+  th.r, td.r { text-align: right; }
+  td { padding: 12px 8px; border-bottom: 1px solid var(--rule); font-size: 13.5px; }
+  tr:last-child td { border-bottom: none; }
+  .nm { font-weight: 600; }
+  .up { color: var(--up); } .down { color: var(--down); }
+  .st-on { font-size: 11px; letter-spacing: 0.06em; color: var(--ink); }
+  .st-off { font-size: 11px; letter-spacing: 0.06em; color: var(--ink-3); }
+
+  .rail { border-left: 1px solid var(--rule); padding-left: 32px; }
+  section.blk + section.blk { margin-top: 36px; }
+
+  /* 三步流程 */
+  .step-blk { padding: 14px 0 16px; border-bottom: 1px solid var(--rule); }
+  .step-blk:last-child { border-bottom: none; }
+  .step-h { font-size: 13.5px; font-weight: 600; margin-bottom: 10px; }
+  .step-h .step-no { font-family: var(--serif); font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.08em; margin-right: 8px; }
+
+  .intent-box { background: rgba(28,26,23,0.05); padding: 14px 16px; font-size: 13.5px; line-height: 1.8; color: var(--ink-2); }
+  .intent-box .ph { color: var(--ink); }
+
+  .rule-list { list-style: none; }
+  .rule-list li { display: flex; gap: 12px; font-size: 13px; line-height: 1.7; padding: 7px 0; border-bottom: 1px solid var(--rule); }
+  .rule-list li:last-child { border-bottom: none; }
+  .rule-list .mk { font-family: var(--serif); font-weight: 700; min-width: 18px; color: var(--ink-3); }
+  .rule-list li.add .mk { color: var(--accent); }
+  .rule-list li.del .txt { color: var(--ink-3); text-decoration: line-through; }
+  .rule-list li.del .mk { color: var(--ink-3); }
+  .rule-list .tag { margin-left: auto; font-size: 11px; color: var(--ink-3); letter-spacing: 0.06em; white-space: nowrap; padding-left: 12px; }
+  .rule-list li.add .tag { color: var(--accent); }
+
+  .prose p { font-size: 13px; line-height: 1.9; color: var(--ink-2); padding: 6px 0; }
+  .prose b { color: var(--ink); font-weight: 600; }
+
+  .foot { margin-top: 36px; padding-top: 10px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 11px; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="brand">投研助手<span>AI-AUGMENTED RESEARCH</span></div>
+  <nav class="nav">
+    <a href="index.html">总览</a><a href="positions.html">当前持仓</a><a href="research.html">单股研究</a><a href="opportunities.html">机会发现</a><a class="active" href="strategies.html">策略中心</a><a href="simulation.html">模拟组合</a><a href="tasks.html">任务记录 (3)</a>
+  </nav>
+  <span class="date">2026 年 9 月 24 日 · 周四 · 已收盘</span>
+</header>
+
+<div class="page">
+  <section class="lede">
+    <h1>策略中心：<em>4 个预制策略</em>，1 个 AI 草案待确认</h1>
+    <p class="summary">2 个策略启用中。你描述的「低波动、分红稳定」意图已生成规则草案，<b>编辑确认后即可回测</b>；低波红利策略最近一次回测任务失败，见任务记录。</p>
+  </section>
+
+  <div class="columns">
+    <div>
+      <section class="blk">
+        <h2><span class="sec-no">01</span>预制策略</h2>
+        <table>
+          <thead><tr><th>策略</th><th>一句话逻辑</th><th class="r">近一年回测</th><th class="r">状态</th></tr></thead>
+          <tbody>
+            <tr><td><span class="nm">低波红利</span></td><td>低波动 + 连续 3 年分红，持有期 6 个月</td><td class="r up">+11.2%</td><td class="r"><span class="st-on">启用</span></td></tr>
+            <tr><td><span class="nm">动量突破</span></td><td>20 日新高 + 放量，5 日不达预期即退出</td><td class="r up">+18.6%</td><td class="r"><span class="st-on">启用</span></td></tr>
+            <tr><td><span class="nm">价值回归</span></td><td>PE 分位低于 20% 且 ROE 高于 12%</td><td class="r up">+9.4%</td><td class="r"><span class="st-off">停用</span></td></tr>
+            <tr><td><span class="nm">事件驱动</span></td><td>业绩预增公告后捕捉 5 日动量</td><td class="r up">+14.8%</td><td class="r"><span class="st-off">停用</span></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="blk">
+        <h2><span class="sec-no">02</span>自然语言建策略</h2>
+
+        <div class="step-blk">
+          <div class="step-h"><span class="step-no">步骤 01</span>描述意图</div>
+          <div class="intent-box"><span class="ph">找低波动、分红稳定的股票，最好最近有资金在持续买入。</span>拿不住暴涨暴跌的，回撤小一点优先。</div>
+        </div>
+
+        <div class="step-blk">
+          <div class="step-h"><span class="step-no">步骤 02</span>AI 草案</div>
+          <ul class="rule-list">
+            <li><span class="mk">·</span><span class="txt">60 日年化波动率 &lt; 20%</span><span class="tag">对应「低波动」</span></li>
+            <li><span class="mk">·</span><span class="txt">连续 3 年现金分红，且股息率 &gt; 3%</span><span class="tag">对应「分红稳定」</span></li>
+            <li><span class="mk">·</span><span class="txt">近 4 周北向资金净流入为正</span><span class="tag">对应「资金买入」</span></li>
+            <li><span class="mk">·</span><span class="txt">剔除 ST 及上市不足 1 年标的</span><span class="tag">默认风控</span></li>
+          </ul>
+        </div>
+
+        <div class="step-blk">
+          <div class="step-h"><span class="step-no">步骤 03</span>编辑确认</div>
+          <ul class="rule-list">
+            <li><span class="mk">·</span><span class="txt">60 日年化波动率 &lt; 20%</span></li>
+            <li><span class="mk">·</span><span class="txt">连续 3 年现金分红</span></li>
+            <li class="del"><span class="mk">−</span><span class="txt">股息率 &gt; 3%</span></li>
+            <li class="add"><span class="mk">＋</span><span class="txt">股息率 &gt; 2.5%，且分红率 &lt; 70%</span><span class="tag">你修改 · 防透支分红</span></li>
+            <li><span class="mk">·</span><span class="txt">近 4 周北向资金净流入为正</span></li>
+            <li class="add"><span class="mk">＋</span><span class="txt">剔除近 1 年发生商誉减值的标的</span><span class="tag">AI 建议新增</span></li>
+            <li><span class="mk">·</span><span class="txt">剔除 ST 及上市不足 1 年标的</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <aside class="rail">
+      <section class="blk" style="margin-top:0">
+        <h2><span class="sec-no">03</span>草案说明</h2>
+        <div class="prose">
+          <p>「资金在持续买入」被转译为<b>北向净流入</b>而非大单资金，因为前者数据质量更稳定、回测可复现。若你指的是龙虎榜或主力资金，请明说，规则会重写。</p>
+          <p>新增「分红率 &lt; 70%」是因为高股息但透支利润的公司，次年削减分红的概率显著更高——这正是「分红稳定」的反面。</p>
+        </div>
+      </section>
+
+      <section class="blk">
+        <h2><span class="sec-no">04</span>风险提示</h2>
+        <div class="prose">
+          <p>回测区间仅覆盖近一年，低波动风格在利率上行期可能系统性跑输；规则经人工修改后<b>过拟合风险上升</b>，建议确认后先进入模拟组合验证 4 周。</p>
+          <p>分红政策受公司决策影响，历史连续分红不构成未来承诺。</p>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <div class="foot">演示数据 · 原型，非投资建议</div>
+</div>
+</body>
+</html>

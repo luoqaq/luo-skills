@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>投研助手 · 任务记录</title>
+<style>
+  :root {
+    --paper: #faf8f4;
+    --ink: #1c1a17;
+    --ink-2: #57534a;
+    --ink-3: #96907f;
+    --rule: rgba(28,26,23,0.14);
+    --accent: #b3342a;
+    --up: #c23024;
+    --down: #1e7d4f;
+    --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+    --sans: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+  /* 刊头 */
+  .masthead { display: flex; align-items: baseline; gap: 32px; padding: 20px 40px 16px; border-bottom: 1px solid var(--ink); }
+  .brand { font-family: var(--serif); font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
+  .brand span { font-family: var(--sans); font-size: 11px; font-weight: 400; color: var(--ink-3); margin-left: 10px; letter-spacing: 0.06em; }
+  .nav { display: flex; gap: 22px; }
+  .nav a { color: var(--ink-2); text-decoration: none; font-size: 13px; }
+  .nav a.active { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+  .masthead .date { margin-left: auto; color: var(--ink-3); font-size: 12px; }
+
+  .page { padding: 28px 40px; max-width: 1280px; }
+
+  /* 导语区 */
+  .lede { display: grid; grid-template-columns: 7fr 4fr; gap: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+  .lede h1 { font-family: var(--serif); font-size: 44px; font-weight: 700; line-height: 1.1; }
+  .lede h1 em { font-style: normal; color: var(--accent); }
+  .lede .summary { font-size: 15px; line-height: 1.9; color: var(--ink-2); align-self: end; padding-bottom: 4px; }
+  .lede .summary b { color: var(--ink); font-weight: 600; }
+
+  /* 本页全宽 */
+  .content { padding-top: 24px; }
+  .sec-no { font-family: var(--serif); color: var(--accent); font-size: 13px; font-weight: 700; margin-right: 8px; }
+  h2 { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; padding-bottom: 10px; border-bottom: 1px solid var(--ink); margin-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; color: var(--ink-3); font-weight: 400; letter-spacing: 0.08em; padding: 10px 8px 8px; border-bottom: 1px solid var(--rule); }
+  th.r, td.r { text-align: right; }
+  td { padding: 12px 8px; border-bottom: 1px solid var(--rule); font-size: 13.5px; }
+  tr:last-child td { border-bottom: none; }
+  .nm { font-weight: 600; }
+  .st { font-size: 12px; letter-spacing: 0.05em; white-space: nowrap; }
+  .st-run { color: var(--ink-2); }
+  .st-wait { color: var(--ink-3); }
+  .st-done { color: var(--ink-3); }
+  .st-fail { color: var(--accent); font-weight: 600; }
+  .pbar { display: block; width: 88px; height: 2px; background: var(--rule); margin-top: 6px; }
+  .pbar i { display: block; height: 100%; background: var(--ink-3); }
+  .fail-reason { color: var(--accent); font-size: 12.5px; }
+  .muted { color: var(--ink-3); }
+
+  section.blk + section.blk { margin-top: 36px; }
+
+  /* 处理建议 */
+  .nlist { list-style: none; max-width: 760px; }
+  .nlist li { display: flex; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 13.5px; line-height: 1.7; }
+  .nlist li:last-child { border-bottom: none; }
+  .nlist .no { font-family: var(--serif); font-weight: 700; color: var(--ink-3); font-size: 13px; min-width: 22px; padding-top: 1px; }
+  .nlist b { font-weight: 600; }
+  .nlist .act { color: var(--accent); cursor: pointer; border-bottom: 1px solid var(--accent); padding-bottom: 1px; font-size: 12.5px; white-space: nowrap; margin-left: auto; align-self: center; }
+
+  .foot { margin-top: 36px; padding-top: 10px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 11px; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="brand">投研助手<span>AI-AUGMENTED RESEARCH</span></div>
+  <nav class="nav">
+    <a href="index.html">总览</a><a href="positions.html">当前持仓</a><a href="research.html">单股研究</a><a href="opportunities.html">机会发现</a><a href="strategies.html">策略中心</a><a href="simulation.html">模拟组合</a><a class="active" href="tasks.html">任务记录 (3)</a>
+  </nav>
+  <span class="date">2026 年 9 月 24 日 · 周四 · 已收盘</span>
+</header>
+
+<div class="page">
+  <section class="lede">
+    <h1>任务记录：<em>1 个失败</em>待处理</h1>
+    <p class="summary">低波红利回测因<b>缺少历史分笔数据</b>中断，需你选择替代方案后重跑。另有 1 个研究任务运行中（68%）、1 个抓取任务排队中，无需干预。</p>
+  </section>
+
+  <div class="content">
+    <section class="blk">
+      <h2><span class="sec-no">01</span>任务列表</h2>
+      <table>
+        <thead><tr><th>任务</th><th>类型</th><th>状态</th><th>所用数据</th><th class="r">耗时</th><th>失败原因</th></tr></thead>
+        <tbody>
+          <tr><td><span class="nm">单股研究 · 中际旭创</span></td><td>单股研究</td><td><span class="st st-run">运行中 68%</span><span class="pbar"><i style="width:68%"></i></span></td><td>研报 2 篇、公告 1 条、行业数据 1 组</td><td class="r">已运行 6 分 12 秒</td><td class="muted">—</td></tr>
+          <tr><td><span class="nm">资料抓取 · 比亚迪公告</span></td><td>资料抓取</td><td><span class="st st-wait">排队中</span></td><td class="muted">待分配</td><td class="r muted">—</td><td class="muted">—</td></tr>
+          <tr><td><span class="nm">策略回测 · 低波红利</span></td><td>策略回测</td><td><span class="st st-fail">● 失败</span></td><td>历史日线（分笔缺失）</td><td class="r">1 分 05 秒后中断</td><td><span class="fail-reason">缺少所选数据源的历史分笔数据</span></td></tr>
+          <tr><td><span class="nm">研报解析 · 宁德时代</span></td><td>研报解析</td><td><span class="st st-done">完成</span></td><td>研报 2 篇</td><td class="r">48 秒</td><td class="muted">—</td></tr>
+          <tr><td><span class="nm">数据更新 · 每日行情</span></td><td>数据更新</td><td><span class="st st-done">完成</span></td><td>全市场日线、北向资金流</td><td class="r">2 分 03 秒</td><td class="muted">—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="blk">
+      <h2><span class="sec-no">02</span>失败任务处理建议</h2>
+      <ol class="nlist">
+        <li><span class="no">1</span><span><b>切换数据源后重跑。</b>改用含历史分笔的数据源，回测精度不变，但本次任务预计耗时增至 8–10 分钟。</span><a class="act">切换并重跑</a></li>
+        <li><span class="no">2</span><span><b>降级为日线级回测。</b>使用现有日线数据即可运行，1 分钟内完成；代价是买卖点精度下降，滑点估计偏乐观。</span><a class="act">降级重跑</a></li>
+        <li><span class="no">3</span><span><b>暂时搁置。</b>低波红利策略当前处于启用状态且沿用 2025-09 的回测结果，本次失败不影响其运行，仅意味着回测未更新。</span><a class="act">搁置</a></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="foot">演示数据 · 原型，非投资建议</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>投研助手 · 模拟组合</title>
+<style>
+  :root {
+    --paper: #faf8f4;
+    --ink: #1c1a17;
+    --ink-2: #57534a;
+    --ink-3: #96907f;
+    --rule: rgba(28,26,23,0.14);
+    --accent: #b3342a;
+    --up: #c23024;
+    --down: #1e7d4f;
+    --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+    --sans: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+  /* 刊头 */
+  .masthead { display: flex; align-items: baseline; gap: 32px; padding: 20px 40px 16px; border-bottom: 1px solid var(--ink); }
+  .brand { font-family: var(--serif); font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
+  .brand span { font-family: var(--sans); font-size: 11px; font-weight: 400; color: var(--ink-3); margin-left: 10px; letter-spacing: 0.06em; }
+  .nav { display: flex; gap: 22px; }
+  .nav a { color: var(--ink-2); text-decoration: none; font-size: 13px; }
+  .nav a.active { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+  .masthead .date { margin-left: auto; color: var(--ink-3); font-size: 12px; }
+
+  .page { padding: 28px 40px; max-width: 1280px; }
+
+  /* 导语区 */
+  .lede { display: grid; grid-template-columns: 7fr 4fr; gap: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+  .lede h1 { font-family: var(--serif); font-size: 44px; font-weight: 700; line-height: 1.1; }
+  .lede h1 em { font-style: normal; color: var(--accent); }
+  .lede .summary { font-size: 15px; line-height: 1.9; color: var(--ink-2); align-self: end; padding-bottom: 4px; }
+  .lede .summary b { color: var(--ink); font-weight: 600; }
+
+  /* 正文双栏 */
+  .columns { display: grid; grid-template-columns: 7fr 4fr; gap: 40px; padding-top: 24px; }
+  .sec-no { font-family: var(--serif); color: var(--accent); font-size: 13px; font-weight: 700; margin-right: 8px; }
+  h2 { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; padding-bottom: 10px; border-bottom: 1px solid var(--ink); margin-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; color: var(--ink-3); font-weight: 400; letter-spacing: 0.08em; padding: 10px 8px 8px; border-bottom: 1px solid var(--rule); }
+  th.r, td.r { text-align: right; }
+  td { padding: 12px 8px; border-bottom: 1px solid var(--rule); font-size: 13.5px; }
+  tr:last-child td { border-bottom: none; }
+  .nm { font-weight: 600; } .cd { color: var(--ink-3); font-size: 11px; margin-left: 6px; }
+  .up { color: var(--up); } .down { color: var(--down); }
+
+  .rail { border-left: 1px solid var(--rule); padding-left: 32px; }
+  section.blk + section.blk { margin-top: 36px; }
+  .rail section.blk { margin-top: 32px; }
+  .rail section.blk:first-child { margin-top: 0; }
+
+  /* 编号列表 */
+  .nlist { list-style: none; }
+  .nlist li { display: flex; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 13px; line-height: 1.7; }
+  .nlist li:last-child { border-bottom: none; }
+  .nlist .no { font-family: var(--serif); font-weight: 700; color: var(--ink-3); font-size: 13px; min-width: 22px; padding-top: 1px; }
+  .nlist .dt { color: var(--ink-3); min-width: 44px; }
+  .nlist .meta { display: block; font-size: 12px; color: var(--ink-3); margin-top: 3px; }
+  .nlist .tag { margin-left: auto; white-space: nowrap; padding-left: 16px; font-size: 11px; letter-spacing: 0.06em; padding-top: 3px; }
+
+  /* 假设记录 */
+  .hypo { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .hypo:last-child { border-bottom: none; }
+  .hypo .t { font-size: 13px; font-weight: 600; line-height: 1.6; }
+  .hypo .m { font-size: 12px; color: var(--ink-2); line-height: 1.7; margin-top: 4px; }
+  .vst { font-size: 11px; letter-spacing: 0.06em; margin-left: 8px; white-space: nowrap; }
+  .vst-pending { color: var(--ink); }
+  .vst-pass { color: var(--ink-3); }
+  .vst-fail { color: var(--accent); }
+
+  .prose p { font-size: 13px; line-height: 1.9; color: var(--ink-2); padding: 6px 0; }
+  .prose b { color: var(--ink); font-weight: 600; }
+
+  .foot { margin-top: 36px; padding-top: 10px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 11px; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="brand">投研助手<span>AI-AUGMENTED RESEARCH</span></div>
+  <nav class="nav">
+    <a href="index.html">总览</a><a href="positions.html">当前持仓</a><a href="research.html">单股研究</a><a href="opportunities.html">机会发现</a><a href="strategies.html">策略中心</a><a class="active" href="simulation.html">模拟组合</a><a href="tasks.html">任务记录 (3)</a>
+  </nav>
+  <span class="date">2026 年 9 月 24 日 · 周四 · 已收盘</span>
+</header>
+
+<div class="page">
+  <section class="lede">
+    <h1>模拟组合：<em>虚拟资金 ¥500,000</em>，浮盈 +3.2%</h1>
+    <p class="summary">4 笔模拟订单对应 4 条待验证假设，其中 <b>1 条已证伪</b>（比亚迪）。模拟资金与真实组合完全隔离，仅用于检验 AI 研判是否值得进入实盘。</p>
+  </section>
+
+  <div class="columns">
+    <div>
+      <section class="blk">
+        <h2><span class="sec-no">01</span>模拟持仓</h2>
+        <table>
+          <thead><tr><th>标的</th><th class="r">成本</th><th class="r">现价</th><th class="r">数量</th><th class="r">浮盈</th></tr></thead>
+          <tbody>
+            <tr><td><span class="nm">中际旭创</span><span class="cd">300308</span></td><td class="r">152.30</td><td class="r">158.72</td><td class="r">1,000</td><td class="r up">+4.2%</td></tr>
+            <tr><td><span class="nm">宁德时代</span><span class="cd">300750</span></td><td class="r">196.00</td><td class="r">201.35</td><td class="r">600</td><td class="r up">+2.7%</td></tr>
+            <tr><td><span class="nm">比亚迪</span><span class="cd">002594</span></td><td class="r">244.00</td><td class="r">238.40</td><td class="r">400</td><td class="r down">−2.3%</td></tr>
+            <tr><td><span class="nm">工业富联</span><span class="cd">601138</span></td><td class="r">22.40</td><td class="r">24.85</td><td class="r">2,500</td><td class="r up">+10.9%</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="blk">
+        <h2><span class="sec-no">02</span>订单记录</h2>
+        <ol class="nlist">
+          <li><span class="no">1</span><span class="dt">09-18</span><span>买入 中际旭创 1,000 股 @ 152.30<span class="meta">关联假设 H1 · 依据单股研究「800G 订单跟踪」</span></span></li>
+          <li><span class="no">2</span><span class="dt">09-12</span><span>买入 宁德时代 600 股 @ 196.00<span class="meta">关联假设 H2 · 依据排产数据跟踪</span></span></li>
+          <li><span class="no">3</span><span class="dt">09-08</span><span>买入 工业富联 2,500 股 @ 22.40<span class="meta">关联假设 H4 · 依据 AI 服务器代工份额跟踪</span></span></li>
+          <li><span class="no">4</span><span class="dt">09-05</span><span>买入 比亚迪 400 股 @ 244.00<span class="meta">关联假设 H3 · 依据出海销量逻辑</span></span></li>
+        </ol>
+      </section>
+    </div>
+
+    <aside class="rail">
+      <section class="blk">
+        <h2><span class="sec-no">03</span>假设记录</h2>
+        <div class="hypo">
+          <div class="t">H1 · 800G 订单上修将推动中际旭创 Q4 业绩超预期<span class="vst vst-pending">待验证</span></div>
+          <div class="m">关联订单 #1（09-18 买入）。验证节点：三季报披露，或交叉验证任务完成。</div>
+        </div>
+        <div class="hypo">
+          <div class="t">H2 · 排产环比改善意味着宁德时代毛利率见底回升<span class="vst vst-pass">已验证</span></div>
+          <div class="m">关联订单 #2（09-12 买入）。9-20 排产数据披露后验证成立，支撑实盘增持建议。</div>
+        </div>
+        <div class="hypo">
+          <div class="t">H3 · 出海销量放量带动比亚迪估值修复<span class="vst vst-fail">已证伪</span></div>
+          <div class="m">关联订单 #4（09-05 买入）。9 月出口数据低于预期，逻辑不成立；实盘已于 09-22 减仓比亚迪。</div>
+        </div>
+        <div class="hypo">
+          <div class="t">H4 · AI 服务器电源代工份额提升驱动工业富联业绩增长<span class="vst vst-pending">待验证</span></div>
+          <div class="m">关联订单 #3（09-08 买入）。验证节点：三季报代工收入拆分。</div>
+        </div>
+      </section>
+
+      <section class="blk">
+        <h2><span class="sec-no">04</span>与真实组合的差异</h2>
+        <div class="prose">
+          <p>模拟组合不含贵州茅台、恒瑞医药——两者为实盘底仓，无待验证假设。中际旭创、宁德时代在两边同时持有，但<b>模拟仓成本独立计算</b>，互不影响。</p>
+          <p>模拟资金 ¥500,000 为虚拟额度，当前已用 ¥423,500，余额 ¥76,500。任何「模拟执行」只进入本组合，不会触碰真实持仓。</p>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <div class="foot">演示数据 · 原型，非投资建议</div>
+</div>
+</body>
+</html>

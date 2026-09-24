@@ -21,7 +21,6 @@
   dialog.className = 'study-dialog';
   dialog.setAttribute('aria-labelledby','study-dialog-title');
   document.body.append(dialog);
-  const reviewed = new Set();
   function show(title, kicker, body) {
     dialog.innerHTML = `<header><div><p class="dialog-kicker">${kicker}</p><h2 id="study-dialog-title">${title}</h2></div><button class="dialog-close" aria-label="关闭详情">×</button></header><div class="dialog-body">${body}<p class="dialog-note">演示数据 · 仅用于界面体验，不连接真实账户。</p></div>`;
     dialog.querySelector('.dialog-close').onclick = () => dialog.close();
@@ -48,13 +47,11 @@
     if(el.hasAttribute('data-range')){chart(el.dataset.range);return;}
     if(el.hasAttribute('data-review')){
       const index=Number(el.dataset.review),r=data.reviews[index];
-      show(r.title,`研究更新 / ${r.tag}`,`<p>${r.description}</p><div class="dialog-comparison"><div><small>当前</small><strong>${r.before}</strong></div><span aria-hidden="true">→</span><div class="after"><small>待审阅建议</small><strong>${r.after}</strong></div></div><h3>依据摘要</h3><p>${r.evidence}</p><h3>需要留意</h3><p>${r.caution}</p><button class="dialog-action" data-mark-reviewed="${index}">${reviewed.has(index)?'已读，返回总览':'标记已读'}</button>`);
+      show(r.title,`研究更新 / ${r.tag}`,`<p>${r.description}</p><div class="dialog-comparison"><div><small>当前</small><strong>${r.before}</strong></div><span aria-hidden="true">→</span><div class="after"><small>待审阅建议</small><strong>${r.after}</strong></div></div><h3>依据摘要</h3><p>${r.evidence}</p><h3>需要留意</h3><p>${r.caution}</p><button class="dialog-action" data-review-done>完成查看</button>`);
       return;
     }
-    if(el.hasAttribute('data-mark-reviewed')){
-      reviewed.add(Number(el.dataset.markReviewed));dialog.close();
-      document.querySelectorAll('[data-pending-count]').forEach(node=>node.textContent=String(3-reviewed.size));
-      toast('已标记为已读 · 仅本次演示会话');return;
+    if(el.hasAttribute('data-review-done')){
+      dialog.close();toast('已查看研究变化 · 组合保持不变');return;
     }
     if(el.hasAttribute('data-stock')){
       const s=data.stocks[Number(el.dataset.stock)];

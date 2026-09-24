@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>投研助手 · 机会发现</title>
+<style>
+  :root {
+    --paper: #faf8f4;
+    --ink: #1c1a17;
+    --ink-2: #57534a;
+    --ink-3: #96907f;
+    --rule: rgba(28,26,23,0.14);
+    --accent: #b3342a;
+    --up: #c23024;
+    --down: #1e7d4f;
+    --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+    --sans: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+  /* 刊头 */
+  .masthead { display: flex; align-items: baseline; gap: 32px; padding: 20px 40px 16px; border-bottom: 1px solid var(--ink); }
+  .brand { font-family: var(--serif); font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
+  .brand span { font-family: var(--sans); font-size: 11px; font-weight: 400; color: var(--ink-3); margin-left: 10px; letter-spacing: 0.06em; }
+  .nav { display: flex; gap: 22px; }
+  .nav a { color: var(--ink-2); text-decoration: none; font-size: 13px; }
+  .nav a.active { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+  .masthead .date { margin-left: auto; color: var(--ink-3); font-size: 12px; }
+
+  .page { padding: 28px 40px; max-width: 1280px; }
+
+  /* 导语区 */
+  .lede { display: grid; grid-template-columns: 7fr 4fr; gap: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+  .lede h1 { font-family: var(--serif); font-size: 44px; font-weight: 700; line-height: 1.1; }
+  .lede h1 em { font-style: normal; color: var(--accent); }
+  .lede .summary { font-size: 15px; line-height: 1.9; color: var(--ink-2); align-self: end; padding-bottom: 4px; }
+  .lede .summary b { color: var(--ink); font-weight: 600; }
+
+  /* 开关行 */
+  .switch-row { display: flex; align-items: center; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  .switch { width: 44px; height: 24px; border-radius: 12px; background: var(--ink-3); position: relative; cursor: pointer; flex-shrink: 0; transition: background 0.15s ease; }
+  .switch .knob { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--paper); transition: left 0.15s ease; }
+  .switch.on { background: var(--accent); }
+  .switch.on .knob { left: 23px; }
+  .sw-state { font-family: var(--serif); font-size: 20px; font-weight: 700; }
+  .sw-desc { font-size: 12px; color: var(--ink-3); margin-top: 3px; }
+
+  /* 正文双栏 */
+  .columns { display: grid; grid-template-columns: 7fr 4fr; gap: 40px; padding-top: 24px; }
+  .sec-no { font-family: var(--serif); color: var(--accent); font-size: 13px; font-weight: 700; margin-right: 8px; }
+  h2 { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; padding-bottom: 10px; border-bottom: 1px solid var(--ink); margin-bottom: 4px; }
+  .nm { font-weight: 600; } .cd { color: var(--ink-3); font-size: 11px; margin-left: 6px; }
+  .rail { border-left: 1px solid var(--rule); padding-left: 32px; }
+
+  .prose p { font-size: 13.5px; line-height: 1.9; color: var(--ink-2); padding: 8px 0; }
+  .prose b { color: var(--ink); font-weight: 600; }
+
+  section.blk + section.blk { margin-top: 36px; }
+  .rail section.blk { margin-top: 32px; }
+  .rail section.blk:first-child { margin-top: 0; }
+
+  /* 候选 */
+  #candidates { opacity: 0.45; transition: opacity 0.2s ease; }
+  #candidates.live { opacity: 1; }
+  .cand-note { font-size: 12px; color: var(--ink-3); padding: 8px 0 4px; }
+  .cand { border-bottom: 1px solid var(--rule); padding: 14px 0; }
+  .cand:last-child { border-bottom: none; }
+  .cand-h { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+  .cand-h .dt { margin-left: auto; font-size: 11px; color: var(--ink-3); }
+  .cand-row { display: flex; gap: 14px; font-size: 13px; line-height: 1.7; padding: 3px 0; }
+  .cand-row .k { min-width: 60px; color: var(--ink-3); font-size: 11px; letter-spacing: 0.08em; padding-top: 2px; }
+  .cand-row.risk .v { color: var(--ink-2); }
+
+  /* 边栏 */
+  .kv { display: flex; justify-content: space-between; font-size: 12.5px; padding: 8px 0; border-bottom: 1px solid var(--rule); color: var(--ink-2); }
+  .kv:last-child { border-bottom: none; }
+  .kv .v { color: var(--ink); }
+
+  .foot { margin-top: 36px; padding-top: 10px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 11px; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="brand">投研助手<span>AI-AUGMENTED RESEARCH</span></div>
+  <nav class="nav">
+    <a href="index.html">总览</a><a href="positions.html">当前持仓</a><a href="research.html">单股研究</a><a class="active" href="opportunities.html">机会发现</a><a href="strategies.html">策略中心</a><a href="simulation.html">模拟组合</a><a href="tasks.html">任务记录 (3)</a>
+  </nav>
+  <span class="date">2026 年 9 月 24 日 · 周四 · 已收盘</span>
+</header>
+
+<div class="page">
+  <section class="lede">
+    <h1>机会发现：<em>当前关闭</em>，3 条候选来自上次运行</h1>
+    <p class="summary">扫描功能默认关闭，避免噪声干扰既定持仓决策。下方候选为 <b>9 月 20 日收盘后</b>最后一次运行的结果，已过期 4 天，仅供参考。</p>
+  </section>
+
+  <div class="switch-row">
+    <div class="switch" id="sw" role="switch" aria-checked="false" tabindex="0"><span class="knob"></span></div>
+    <div>
+      <div class="sw-state" id="swState">机会扫描 · 已关闭</div>
+      <div class="sw-desc" id="swDesc">开启后，每个交易日收盘后自动扫描全市场，命中条件即生成候选并通知你。</div>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div>
+      <section class="blk">
+        <h2><span class="sec-no">01</span>策略说明</h2>
+        <div class="prose">
+          <p>触发条件：收盘价创 <b>20 日新高</b>，且当日成交量放大至 20 日均量的 <b>1.5 倍</b>以上，且北向资金当日<b>净流入为正</b>。三者同时满足才进入候选，单一条件不触发。</p>
+          <p>扫描在收盘后运行，结果只做记录不自动下单；每条候选需经单股研究流程确认后才可转为持仓。每周日晚生成一次复盘，统计候选的后续 5 日表现。</p>
+        </div>
+      </section>
+
+      <section class="blk">
+        <h2><span class="sec-no">02</span>候选列表</h2>
+        <div id="candidates">
+          <div class="cand-note" id="candNote">开关关闭期间不更新；以下为上次运行（09-20）结果。</div>
+          <div class="cand">
+            <div class="cand-h"><span class="nm">沪电股份</span><span class="cd">002463</span><span class="dt">触发于 09-20</span></div>
+            <div class="cand-row"><span class="k">触发原因</span><span class="v">20 日新高，成交量放大至均量 1.8 倍，北向净流入 ¥1.2 亿</span></div>
+            <div class="cand-row"><span class="k">关键证据</span><span class="v">AI 服务器 PCB 订单饱满，产能利用率连续两季度超 95%</span></div>
+            <div class="cand-row risk"><span class="k">风险</span><span class="v">年内涨幅已大，回撤风险高；尚未进入单股研究流程</span></div>
+          </div>
+          <div class="cand">
+            <div class="cand-h"><span class="nm">中远海控</span><span class="cd">601919</span><span class="dt">触发于 09-20</span></div>
+            <div class="cand-row"><span class="k">触发原因</span><span class="v">20 日新高，成交量放大至均量 2.1 倍，北向净流入 ¥0.8 亿</span></div>
+            <div class="cand-row"><span class="k">关键证据</span><span class="v">欧线运价连续三周反弹，Q4 长协价谈判预期升温</span></div>
+            <div class="cand-row risk"><span class="k">风险</span><span class="v">运价波动剧烈，事件驱动特征强，持有周期难把握</span></div>
+          </div>
+          <div class="cand">
+            <div class="cand-h"><span class="nm">长江电力</span><span class="cd">600900</span><span class="dt">触发于 09-20</span></div>
+            <div class="cand-row"><span class="k">触发原因</span><span class="v">20 日新高，成交量放大至均量 1.6 倍，北向净流入 ¥2.3 亿</span></div>
+            <div class="cand-row"><span class="k">关键证据</span><span class="v">来水偏丰，三季报发电量预增；股息率 3.8% 具防御性</span></div>
+            <div class="cand-row risk"><span class="k">风险</span><span class="v">弹性有限，与组合现有成长风格的相关性低、贡献有限</span></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="rail">
+      <section class="blk">
+        <h2><span class="sec-no">03</span>上次运行记录</h2>
+        <div class="kv"><span>运行时间</span><span class="v">09-20 15:30</span></div>
+        <div class="kv"><span>扫描标的</span><span class="v">4,832 只</span></div>
+        <div class="kv"><span>命中候选</span><span class="v">3 条</span></div>
+        <div class="kv"><span>耗时</span><span class="v">2 分 41 秒</span></div>
+        <div class="kv"><span>候选后续 5 日均值</span><span class="v up">+2.1%</span></div>
+      </section>
+
+      <section class="blk">
+        <h2><span class="sec-no">04</span>扫描范围说明</h2>
+        <div class="prose">
+          <p>覆盖沪深主板、创业板与科创板，剔除 ST、*ST 及上市不足 120 个交易日的标的；不包含北交所与港股通。</p>
+          <p>数据源为每日行情与北向资金流，分笔数据不参与扫描。扫描结果不进入模拟组合，除非你在研究页显式选择「模拟执行」。</p>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <div class="foot">演示数据 · 原型，非投资建议</div>
+</div>
+
+<script>
+  var sw = document.getElementById('sw');
+  var state = document.getElementById('swState');
+  var desc = document.getElementById('swDesc');
+  var cands = document.getElementById('candidates');
+  var note = document.getElementById('candNote');
+  function toggle() {
+    var on = sw.classList.toggle('on');
+    sw.setAttribute('aria-checked', on);
+    state.textContent = on ? '机会扫描 · 已开启' : '机会扫描 · 已关闭';
+    desc.textContent = on
+      ? '今日收盘后 15:30 运行首次扫描，命中条件即生成候选并通知你。'
+      : '开启后，每个交易日收盘后自动扫描全市场，命中条件即生成候选并通知你。';
+    cands.classList.toggle('live', on);
+    note.textContent = on
+      ? '以下为上次运行（09-20）结果；今日收盘后将刷新。'
+      : '开关关闭期间不更新；以下为上次运行（09-20）结果。';
+  }
+  sw.addEventListener('click', toggle);
+  sw.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+</script>
+</body>
+</html>
