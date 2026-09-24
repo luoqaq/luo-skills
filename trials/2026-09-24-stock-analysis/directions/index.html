@@ -5,31 +5,31 @@
 <title>方向稿对比 — 总览页</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #1a1a1a; height: 100vh; display: flex; flex-direction: column; }
-  .bar { display: flex; align-items: center; gap: 16px; padding: 10px 16px; background: #1a1a1a; color: #fff; flex-shrink: 0; }
-  .bar .title { font-size: 13px; color: #999; }
-  .seg { display: flex; background: #2c2c2c; border-radius: 8px; padding: 3px; }
-  .seg button {
-    border: none; background: transparent; color: #bbb; font-size: 13px;
-    padding: 6px 16px; border-radius: 6px; cursor: pointer;
-  }
-  .seg button.active { background: #fff; color: #1a1a1a; font-weight: 600; }
-  .bar .hint { margin-left: auto; font-size: 12px; color: #777; }
-  iframe { flex: 1; border: none; width: 100%; }
+  body { height: 100vh; overflow: hidden; }
+  iframe { border: none; width: 100%; height: 100vh; display: block; }
   iframe.hidden { display: none; }
+  .dock {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 2px; z-index: 10;
+    background: rgba(28, 28, 30, 0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-radius: 999px; padding: 4px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  }
+  .dock button {
+    border: none; background: transparent; color: #d4d4d4; cursor: pointer;
+    font-family: -apple-system, "PingFang SC", sans-serif; font-size: 13px;
+    padding: 8px 18px; border-radius: 999px; white-space: nowrap;
+  }
+  .dock button.active { background: #fff; color: #111; font-weight: 600; }
 </style>
 </head>
 <body>
-<div class="bar">
-  <span class="title">总览页 · 方向稿对比</span>
-  <div class="seg">
-    <button id="btnA" class="active" onclick="show('A')">A · 数据工作台</button>
-    <button id="btnB" onclick="show('B')">B · 分析驾驶舱</button>
-  </div>
-  <span class="hint">两个方向稿共用同一份演示数据，仅布局/密度/配色不同</span>
-</div>
 <iframe id="frameA" src="a-workbench.html"></iframe>
 <iframe id="frameB" src="b-cockpit.html" class="hidden"></iframe>
+<div class="dock">
+  <button id="btnA" class="active" onclick="show('A')">A · 数据工作台</button>
+  <button id="btnB" onclick="show('B')">B · 分析驾驶舱</button>
+</div>
 <script>
   function show(which) {
     document.getElementById('frameA').classList.toggle('hidden', which !== 'A');
