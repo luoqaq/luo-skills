@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>方向稿 · 现代账本 — 总览</title>
+<style>
+  :root {
+    --paper: #faf9f6;
+    --ink: #181716;
+    --ink-2: #5f5b55;
+    --ink-3: #a09a8f;
+    --hairline: rgba(24,23,22,0.1);
+    --accent: #175e4c;
+    --up: #c2402e;
+    --down: #20795a;
+    --sans: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .app { display: flex; min-height: 100vh; }
+
+  /* 窄索引列 */
+  .index-col { width: 148px; flex-shrink: 0; padding: 32px 0 32px 24px; }
+  .brand { font-size: 13px; font-weight: 700; margin-bottom: 28px; }
+  .brand span { display: block; font-weight: 400; font-size: 10px; color: var(--ink-3); margin-top: 4px; letter-spacing: 0.08em; }
+  .idx { display: flex; gap: 10px; padding: 6px 0; font-size: 12.5px; color: var(--ink-2); align-items: baseline; }
+  .idx .no { font-size: 10px; color: var(--ink-3); }
+  .idx.active { color: var(--accent); font-weight: 600; }
+  .idx.active .no { color: var(--accent); }
+  .idx .bd { margin-left: auto; font-size: 10px; color: #fff; background: var(--accent); border-radius: 8px; padding: 0 6px; line-height: 16px; }
+
+  .main { flex: 1; padding: 32px 48px; max-width: 1100px; }
+
+  /* 数字主角区 */
+  .headline { padding-bottom: 28px; border-bottom: 1px solid var(--ink); display: flex; align-items: flex-end; justify-content: space-between; }
+  .headline .label { font-size: 12px; color: var(--ink-3); letter-spacing: 0.12em; }
+  .headline .big { font-size: 64px; font-weight: 300; letter-spacing: -0.03em; line-height: 1.05; margin-top: 8px; }
+  .headline .big .cents { font-size: 28px; color: var(--ink-3); }
+  .headline .delta { font-size: 15px; margin-top: 10px; }
+  .headline .aside { text-align: right; color: var(--ink-2); font-size: 12.5px; line-height: 2; }
+  .up { color: var(--up); } .down { color: var(--down); }
+
+  .substats { display: flex; gap: 40px; padding: 14px 0; border-bottom: 1px solid var(--hairline); font-size: 12.5px; color: var(--ink-2); }
+  .substats b { color: var(--ink); font-weight: 600; }
+  .substats .warn b { color: var(--up); }
+
+  /* 连续账本列表 */
+  .section-label { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-3); margin: 26px 0 6px; }
+  .h-row { display: grid; grid-template-columns: 1.4fr repeat(4, minmax(88px, auto)); gap: 24px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--hairline); }
+  .h-row .nm { font-size: 15px; font-weight: 600; }
+  .h-row .nm .cd { font-size: 11px; color: var(--ink-3); font-weight: 400; margin-left: 8px; }
+  .h-row .cell { text-align: right; font-size: 14px; }
+  .h-row .cell.major { font-size: 17px; font-weight: 600; }
+  .h-row .cell .sub { display: block; font-size: 10.5px; color: var(--ink-3); font-weight: 400; margin-top: 1px; }
+  .h-row.header { padding: 6px 0; }
+  .h-row.header span { font-size: 10.5px; color: var(--ink-3); letter-spacing: 0.1em; text-align: right; }
+  .h-row.header span:first-child { text-align: left; }
+
+  .bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 8px; }
+  .r-item { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--hairline); }
+  .r-item .no { font-size: 15px; font-weight: 300; color: var(--accent); }
+  .r-item .t { font-weight: 600; font-size: 13.5px; }
+  .r-item .d { color: var(--ink-2); font-size: 12.5px; line-height: 1.65; margin-top: 2px; }
+  .r-item .a { font-size: 12px; color: var(--accent); margin-top: 5px; font-weight: 500; }
+  .r-item .a span { color: var(--ink-3); margin-left: 14px; font-weight: 400; }
+  .q { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--hairline); font-size: 12.5px; color: var(--ink-2); }
+  .q:last-child { border-bottom: none; }
+  .q .run { color: var(--accent); } .q .wait { color: var(--ink-3); } .q .fail { color: var(--up); }
+  .note { margin-top: 30px; font-size: 11px; color: var(--ink-3); letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="index-col">
+    <div class="brand">投研助手<span>AI RESEARCH</span></div>
+    <div class="idx active"><span class="no">01</span>总览</div>
+    <div class="idx"><span class="no">02</span>当前持仓</div>
+    <div class="idx"><span class="no">03</span>单股研究</div>
+    <div class="idx"><span class="no">04</span>机会发现</div>
+    <div class="idx"><span class="no">05</span>策略中心</div>
+    <div class="idx"><span class="no">06</span>模拟组合</div>
+    <div class="idx"><span class="no">07</span>任务记录<span class="bd">3</span></div>
+  </aside>
+
+  <main class="main">
+    <div class="headline">
+      <div>
+        <div class="label">总资产 · 演示数据</div>
+        <div class="big">¥1,284,560<span class="cents">.32</span></div>
+        <div class="delta up">今日 +2.34% · +¥28,411</div>
+      </div>
+      <div class="aside">2026-09-24 周四<br>A 股已收盘 · 最近分析 14:32</div>
+    </div>
+
+    <div class="substats">
+      <span>持仓 <b>6 只</b> · 仓位 <b>78.5%</b></span>
+      <span>待审阅 <b>3 项</b> · 最早等待 2 天</span>
+      <span>运行中任务 <b>2 个</b></span>
+      <span class="warn">策略回测 <b>1 个失败</b></span>
+    </div>
+
+    <div class="section-label">持仓摘要</div>
+    <div class="h-row header"><span>标的</span><span>现价</span><span>今日</span><span>占比</span><span>浮动盈亏</span></div>
+    <div class="h-row"><span class="nm">宁德时代<span class="cd">300750</span></span><span class="cell">201.35</span><span class="cell up">+3.20%</span><span class="cell major">24.1%</span><span class="cell up">+18.4%<span class="sub">待审阅</span></span></div>
+    <div class="h-row"><span class="nm">贵州茅台<span class="cd">600519</span></span><span class="cell">1,689.00</span><span class="cell down">−0.80%</span><span class="cell major">19.8%</span><span class="cell up">+6.2%<span class="sub">3 天前分析</span></span></div>
+    <div class="h-row"><span class="nm">中际旭创<span class="cd">300308</span></span><span class="cell">158.72</span><span class="cell up">+5.12%</span><span class="cell major">14.3%</span><span class="cell up">+42.7%<span class="sub">待审阅</span></span></div>
+    <div class="h-row"><span class="nm">比亚迪<span class="cd">002594</span></span><span class="cell">238.40</span><span class="cell up">+1.05%</span><span class="cell major">11.2%</span><span class="cell down">−2.1%<span class="sub">昨天分析</span></span></div>
+    <div class="h-row"><span class="nm">恒瑞医药<span class="cd">600276</span></span><span class="cell">46.18</span><span class="cell down">−1.30%</span><span class="cell major">9.1%</span><span class="cell down">−5.6%<span class="sub">5 天前分析</span></span></div>
+
+    <div class="bottom">
+      <section>
+        <div class="section-label">待审阅项</div>
+        <div class="r-item"><span class="no">1</span><div><div class="t">建议增持宁德时代 24% → 28%</div><div class="d">基于 Q3 排产数据与 2 篇新研报。</div><div class="a">查看差异<span>忽略</span></div></div></div>
+        <div class="r-item"><span class="no">2</span><div><div class="t">中际旭创研报结论更新</div><div class="d">800G 订单上修，目标价分歧扩大，含 1 条反面证据。</div><div class="a">查看差异<span>忽略</span></div></div></div>
+        <div class="r-item"><span class="no">3</span><div><div class="t">贵州茅台止损线建议调整</div><div class="d">¥1,580 → ¥1,620，基于波动率收窄。</div><div class="a">查看差异<span>忽略</span></div></div></div>
+      </section>
+      <section>
+        <div class="section-label">任务队列</div>
+        <div class="q"><span>单股研究 · 中际旭创</span><span class="run">运行中 68%</span></div>
+        <div class="q"><span>资料抓取 · 比亚迪公告</span><span class="wait">排队中</span></div>
+        <div class="q"><span>策略回测 · 低波红利</span><span class="fail">失败 · 缺数据源</span></div>
+        <div class="note">方向稿「现代账本」：数字为主角，宽窄对比，连续列表，无卡片无面板 · 演示数据</div>
+      </section>
+    </div>
+  </main>
+</div>
+</body>
+</html>

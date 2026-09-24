@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>方向稿对比 v2 — 总览页</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { height: 100vh; overflow: hidden; }
+  iframe { border: none; width: 100%; height: 100vh; display: block; }
+  iframe.hidden { display: none; }
+  .dock {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 2px; z-index: 10;
+    background: rgba(28, 28, 30, 0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-radius: 999px; padding: 4px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  }
+  .dock button {
+    border: none; background: transparent; color: #d4d4d4; cursor: pointer;
+    font-family: -apple-system, "PingFang SC", sans-serif; font-size: 13px;
+    padding: 8px 18px; border-radius: 999px; white-space: nowrap;
+  }
+  .dock button.active { background: #fff; color: #111; font-weight: 600; }
+</style>
+</head>
+<body>
+<iframe id="f0" src="journal.html"></iframe>
+<iframe id="f1" src="terminal.html" class="hidden"></iframe>
+<iframe id="f2" src="ledger.html" class="hidden"></iframe>
+<div class="dock">
+  <button id="b0" class="active" onclick="show(0)">研究刊物</button>
+  <button id="b1" onclick="show(1)">精密终端</button>
+  <button id="b2" onclick="show(2)">现代账本</button>
+</div>
+<script>
+  function show(i) {
+    [0, 1, 2].forEach(n => {
+      document.getElementById('f' + n).classList.toggle('hidden', n !== i);
+      document.getElementById('b' + n).classList.toggle('active', n === i);
+    });
+  }
+</script>
+</body>
+</html>

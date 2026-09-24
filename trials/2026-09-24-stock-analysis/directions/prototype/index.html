@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>观澜 · 三种视觉方向</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ed;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}iframe{display:block;width:100%;height:100dvh;border:0}.switcher{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:5px;background:#202824ee;border:1px solid #ffffff24;border-radius:18px;padding:7px;box-shadow:0 12px 50px #0003;backdrop-filter:blur(18px);color:#e8ece8}.switcher button{font:12px/1.3 inherit;border:0;cursor:pointer;color:inherit;background:transparent;border-radius:11px;transition:background .18s,color .18s}.direction{display:flex;align-items:center;gap:9px;padding:10px 15px;white-space:nowrap}.direction i{font-style:normal;opacity:.5;font-size:11px}.direction[aria-pressed="true"]{background:#f3f4ec;color:#243a2c}.direction[aria-pressed="true"] i{opacity:.65}.arrow{width:32px;height:39px;font-size:18px!important}.arrow:hover,.direction:hover{background:#ffffff15}.direction[aria-pressed="true"]:hover{background:#fff}.switcher-label{border-right:1px solid #ffffff25;margin-right:3px;padding:0 13px 0 9px;font-size:10px;line-height:1.5;color:#a6b1a9;white-space:nowrap}button:focus-visible{outline:2px solid #c1d9a5;outline-offset:2px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media(max-width:650px){.switcher{bottom:12px;padding:5px;gap:0;border-radius:14px}.switcher-label{display:none}.direction{padding:10px 9px;font-size:11px;gap:5px}.arrow{width:24px}}
+</style>
+</head>
+<body>
+<!-- Three throwaway visual directions for the same stock-research overview. -->
+<iframe id="canvas" title="观澜投研总览原型"></iframe>
+<nav class="switcher" aria-label="视觉方向切换">
+ <div class="switcher-label">视觉探索<br>演示原型</div>
+ <button class="arrow" id="prev" aria-label="上一个方向">‹</button>
+ <button class="direction" data-variant="A" aria-pressed="true"><i>01</i>研究刊物</button>
+ <button class="direction" data-variant="B" aria-pressed="false"><i>02</i>精密终端</button>
+ <button class="direction" data-variant="C" aria-pressed="false"><i>03</i>现代账本</button>
+ <button class="arrow" id="next" aria-label="下一个方向">›</button>
+</nav>
+<div class="sr-only" id="status" role="status"></div>
+<script>
+const variants={A:{file:'a-editorial.html',name:'研究刊物'},B:{file:'b-terminal.html',name:'精密终端'},C:{file:'c-ledger.html',name:'现代账本'}};
+let current='A';
+function setVariant(key,update=true){
+  current=variants[key]?key:'A';
+  document.querySelector('#canvas').src=variants[current].file;
+  document.querySelectorAll('[data-variant]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.variant===current)));
+  document.querySelector('#status').textContent=`当前方向 ${current}：${variants[current].name}`;
+  document.title=`观澜 · ${variants[current].name}`;
+  if(update){const url=new URL(location.href);url.searchParams.set('variant',current);history.replaceState(null,'',url);}
+}
+function cycle(delta){const keys=Object.keys(variants);setVariant(keys[(keys.indexOf(current)+delta+keys.length)%keys.length]);}
+document.querySelectorAll('[data-variant]').forEach(button=>button.onclick=()=>setVariant(button.dataset.variant));
+document.querySelector('#prev').onclick=()=>cycle(-1);document.querySelector('#next').onclick=()=>cycle(1);
+document.addEventListener('keydown',event=>{if(event.altKey||event.metaKey||event.ctrlKey||event.shiftKey||event.target.closest('input,textarea,select,[contenteditable="true"]'))return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();cycle(event.key==='ArrowRight'?1:-1);}});
+window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===document.querySelector('#canvas').contentWindow&&event.data?.type==='prototype-cycle')cycle(event.data.delta);});
+window.addEventListener('popstate',()=>setVariant(new URLSearchParams(location.search).get('variant'),false));
+setVariant(new URLSearchParams(location.search).get('variant'));
+</script>
+</body></html>
