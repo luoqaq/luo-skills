@@ -1,10 +1,10 @@
-# desktop-ui-prototype Skill 设计定稿（2026-09-24）
+# pc-ui-prototype Skill 设计定稿（2026-09-24）
 
 立项依据与竞品调研见 [research/pc-prototype-skill-landscape.md](../../../research/pc-prototype-skill-landscape.md)。本文档只记录定稿的设计决策和 SKILL.md 骨架，不重复调研内容。
 
 ## 定位
 
-名称：`desktop-ui-prototype`（采用调研建议，比 `pc-ui-prototype` 更通用，与"移动端"对仗自然）。
+名称：`pc-ui-prototype`（用户拍板；调研曾建议 `desktop-ui-prototype`，最终采用 `pc-` 前缀，与中文语境"PC 端"一致）。
 
 通用 skill，不绑定宿主（Kimi Code / Codex 都能跑），不引用宿主专属工具名。截图步骤写成能力要求："使用可用的浏览器或截图工具"。
 
@@ -18,15 +18,15 @@
 | 宿主环境 | 通用 skill，两边都能跑 |
 | 单次交付范围 | 不限页面数量，但阶段 1 必须先确认页面清单再动手 |
 | 视觉验收 | 硬门槛；宿主无浏览器工具时，交付必须显式声明"未经视觉验收"并给出人工预览方式 |
-| 文件结构 | `SKILL.md` + 单个参考文件 `desktop-design-reference.md`；脚本等出现重复机械步骤后再抽 |
+| 文件结构 | `SKILL.md` + 单个参考文件 `pc-design-reference.md`；脚本等出现重复机械步骤后再抽 |
 | 验证方式 | 调研第 50-52 行的 A/B/C 盲测作为 skill 完成后的独立验收任务，不写进 SKILL.md |
 
 ## 文件结构
 
 ```
-desktop-ui-prototype/
-├── SKILL.md                      # 触发描述 + 五阶段强制流程
-└── desktop-design-reference.md   # PC 业务页设计判断（阶段 2/4 查阅）
+pc-ui-prototype/
+├── SKILL.md                  # 触发描述 + 五阶段强制流程
+└── pc-design-reference.md    # PC 业务页设计判断（阶段 2/4 查阅）
 ```
 
 `SKILL.md` 保持短，只装流程和契约；设计知识全部放参考文件，按需加载。
@@ -87,7 +87,7 @@ desktop-ui-prototype/
 - 未验证部分清单
 - 明确提示：这是原型，不是生产实现
 
-## 参考文件 desktop-design-reference.md 内容提纲
+## 参考文件 pc-design-reference.md 内容提纲
 
 - 信息密度三档位的适用场景与参数（行高、间距、字号、表格密度）
 - 表格/筛选/表单/图表的 PC 布局惯例（筛选区位置、操作列、分页、空状态）
