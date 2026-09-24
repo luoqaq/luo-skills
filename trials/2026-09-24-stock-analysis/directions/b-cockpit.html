@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方向 B · 分析驾驶舱 — 总览</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --ink: #101828;
+    --ink-2: #475467;
+    --ink-3: #98a2b3;
+    --accent: #0e7490;
+    --up: #e54545;
+    --down: #12a150;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px; color: var(--ink); background: var(--bg);
+    font-variant-numeric: tabular-nums;
+  }
+  .app { display: flex; min-height: 100vh; }
+
+  .sidebar { width: 216px; flex-shrink: 0; padding: 24px 16px; }
+  .logo { font-size: 15px; font-weight: 700; padding: 0 10px 24px; }
+  .logo span { display: block; font-size: 11px; font-weight: 400; color: var(--ink-3); margin-top: 3px; }
+  .nav-item { padding: 9px 12px; border-radius: 8px; color: var(--ink-2); margin-bottom: 2px; display: flex; justify-content: space-between; align-items: center; }
+  .nav-item.active { background: var(--card); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(16,24,40,0.06); }
+  .nav-badge { font-size: 11px; background: var(--accent); color: #fff; border-radius: 9px; padding: 1px 8px; }
+
+  .main { flex: 1; padding: 24px 28px; }
+
+  /* 汇总带：唯一表现力区域 */
+  .hero {
+    background: var(--card); border-radius: var(--radius);
+    padding: 24px 28px; display: flex; align-items: flex-end; gap: 48px;
+    box-shadow: 0 1px 3px rgba(16,24,40,0.05);
+  }
+  .hero .total .label { color: var(--ink-3); font-size: 13px; }
+  .hero .total .value { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-top: 4px; }
+  .hero .total .delta { margin-top: 6px; font-size: 14px; }
+  .hero .spark { margin-left: auto; }
+  .hero .spark .cap { color: var(--ink-3); font-size: 12px; text-align: right; margin-top: 6px; }
+  .up { color: var(--up); } .down { color: var(--down); }
+
+  .chips { display: flex; gap: 10px; margin: 20px 0; }
+  .chip { background: var(--card); border-radius: 999px; padding: 7px 16px; font-size: 13px; color: var(--ink-2); box-shadow: 0 1px 2px rgba(16,24,40,0.05); }
+  .chip b { color: var(--ink); font-weight: 600; }
+  .chip.alert { color: #b45309; }
+
+  .grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 20px 22px; box-shadow: 0 1px 3px rgba(16,24,40,0.05); }
+  .card-title { font-size: 14px; font-weight: 600; margin-bottom: 14px; display: flex; justify-content: space-between; }
+  .card-title .more { color: var(--ink-3); font-weight: 400; font-size: 12px; }
+
+  .holding-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+  .holding-card { border: 1px solid #eef0f3; border-radius: 10px; padding: 12px 14px; }
+  .holding-card .nm { font-weight: 600; font-size: 13px; }
+  .holding-card .cd { color: var(--ink-3); font-size: 11px; margin-left: 4px; }
+  .holding-card .pc { font-size: 20px; font-weight: 700; margin: 6px 0 2px; }
+  .holding-card .sub { font-size: 12px; }
+  .holding-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 2px; border-top: 1px solid #f2f4f7; font-size: 13px; }
+  .holding-row .nm { color: var(--ink-2); }
+
+  .review-item { display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid #f2f4f7; }
+  .review-item:first-of-type { border-top: none; padding-top: 0; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+  .dot.amber { background: #f59e0b; }
+  .review-item .t { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
+  .review-item .d { color: var(--ink-2); font-size: 12.5px; line-height: 1.55; }
+  .review-item .a { margin-top: 6px; font-size: 12px; }
+  .review-item .a b { color: var(--accent); font-weight: 600; margin-right: 14px; }
+  .review-item .a span { color: var(--ink-3); }
+
+  .queue { margin-top: 20px; }
+  .q-item { display: flex; justify-content: space-between; padding: 9px 2px; border-top: 1px solid #f2f4f7; font-size: 12.5px; color: var(--ink-2); }
+  .q-item .run { color: var(--accent); } .q-item .wait { color: var(--ink-3); } .q-item .fail { color: var(--up); }
+  .demo-note { margin-top: 18px; color: var(--ink-3); font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">投研助手<span>AI-Augmented Research</span></div>
+    <div class="nav-item active">总览</div>
+    <div class="nav-item">当前持仓</div>
+    <div class="nav-item">单股研究</div>
+    <div class="nav-item">机会发现</div>
+    <div class="nav-item">策略中心</div>
+    <div class="nav-item">模拟组合</div>
+    <div class="nav-item">任务记录 <span class="nav-badge">3</span></div>
+  </aside>
+
+  <main class="main">
+    <div class="hero">
+      <div class="total">
+        <div class="label">总资产（演示数据）</div>
+        <div class="value">¥1,284,560<span style="font-size:20px;color:var(--ink-3)">.32</span></div>
+        <div class="delta up">今日 +2.34% · +¥28,411</div>
+      </div>
+      <div class="spark">
+        <svg width="220" height="56" viewBox="0 0 220 56" fill="none">
+          <path d="M0 44 L20 40 L40 42 L60 34 L80 36 L100 28 L120 30 L140 22 L160 24 L180 14 L200 16 L220 8" stroke="#e54545" stroke-width="2" stroke-linecap="round"/>
+          <path d="M0 44 L20 40 L40 42 L60 34 L80 36 L100 28 L120 30 L140 22 L160 24 L180 14 L200 16 L220 8 V56 H0 Z" fill="url(#g)" opacity="0.12"/>
+          <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e54545"/><stop offset="1" stop-color="#e54545" stop-opacity="0"/></linearGradient></defs>
+        </svg>
+        <div class="cap">近 30 日净值走势</div>
+      </div>
+    </div>
+
+    <div class="chips">
+      <div class="chip">持仓 <b>6 只</b> · 仓位 <b>78.5%</b></div>
+      <div class="chip alert">待审阅 <b>3 项</b> · 最早等待 2 天</div>
+      <div class="chip">运行中任务 <b>2 个</b></div>
+      <div class="chip">A 股已收盘 · 最近分析 14:32</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">持仓摘要 <span class="more">查看全部 →</span></div>
+        <div class="holding-top">
+          <div class="holding-card"><div><span class="nm">宁德时代</span><span class="cd">300750</span></div><div class="pc">24.1%</div><div class="sub up">+3.20% · 浮盈 +18.4%</div></div>
+          <div class="holding-card"><div><span class="nm">贵州茅台</span><span class="cd">600519</span></div><div class="pc">19.8%</div><div class="sub down">-0.80% · 浮盈 +6.2%</div></div>
+          <div class="holding-card"><div><span class="nm">中际旭创</span><span class="cd">300308</span></div><div class="pc">14.3%</div><div class="sub up">+5.12% · 浮盈 +42.7%</div></div>
+        </div>
+        <div class="holding-row"><span class="nm">比亚迪 <span style="color:var(--ink-3)">002594</span></span><span>11.2% · <span class="up">+1.05%</span></span></div>
+        <div class="holding-row"><span class="nm">恒瑞医药 <span style="color:var(--ink-3)">600276</span></span><span>9.1% · <span class="down">-1.30%</span></span></div>
+        <div class="holding-row"><span class="nm">工业富联 <span style="color:var(--ink-3)">601138</span></span><span>7.4% · <span class="up">+2.20%</span></span></div>
+        <div class="demo-note">方向 B「分析驾驶舱」：均衡密度，汇总带为唯一表现力区域，重仓卡片 + 其余紧凑列表 · 演示数据</div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="card-title">待审阅项 <span class="more">3</span></div>
+          <div class="review-item"><span class="dot"></span><div><div class="t">建议增持宁德时代 24% → 28%</div><div class="d">基于 Q3 排产数据与 2 篇新研报。</div><div class="a"><b>查看差异</b><span>忽略</span></div></div></div>
+          <div class="review-item"><span class="dot"></span><div><div class="t">中际旭创研报结论更新</div><div class="d">800G 订单上修，目标价分歧扩大，含 1 条反面证据。</div><div class="a"><b>查看差异</b><span>忽略</span></div></div></div>
+          <div class="review-item"><span class="dot amber"></span><div><div class="t">贵州茅台止损线建议调整</div><div class="d">¥1,580 → ¥1,620，基于波动率收窄。</div><div class="a"><b>查看差异</b><span>忽略</span></div></div></div>
+        </div>
+        <div class="card queue">
+          <div class="card-title">任务队列</div>
+          <div class="q-item"><span>单股研究 · 中际旭创</span><span class="run">运行中 68%</span></div>
+          <div class="q-item"><span>资料抓取 · 比亚迪公告</span><span class="wait">排队中</span></div>
+          <div class="q-item"><span>策略回测 · 低波红利</span><span class="fail">失败 · 缺数据源</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
