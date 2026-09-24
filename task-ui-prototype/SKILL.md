@@ -1,9 +1,9 @@
 ---
-name: ui-prototype
+name: task-ui-prototype
 description: 设计并交付 PC 端或移动端的任务型界面原型——工作台、后台、dashboard、列表/详情、分析页、表单、设置、消息中心、内容管理等，判断标准是页面的职责让人完成操作或获取信息。输入页面需求，产出可运行的 HTML 原型和对应视口的截图，含强制截图验收。不用于营销落地页和静态艺术图。Use when the user asks to design a task-oriented web UI prototype (dashboard, admin, workbench, list/detail, form, settings, content management, etc.) for desktop or mobile.
 ---
 
-# UI Prototype
+# Task UI Prototype
 
 输入页面需求，交付可运行原型 + 截图。质量来自流程：契约拦住瞎做，简报拦住套路，截图验收拦住自嗨。
 

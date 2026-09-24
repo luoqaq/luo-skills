@@ -1,10 +1,10 @@
-# ui-prototype Skill 设计定稿（2026-09-24）
+# task-ui-prototype Skill 设计定稿（2026-09-24）
 
 立项依据与竞品调研见 [research/pc-prototype-skill-landscape.md](../../../research/pc-prototype-skill-landscape.md)。本文档只记录定稿的设计决策和 SKILL.md 骨架，不重复调研内容。
 
 ## 定位
 
-名称：`ui-prototype`（端无关架构定稿后改名；曾先后考虑 `desktop-ui-prototype`、`pc-ui-prototype`）。
+名称：`task-ui-prototype`（任务型界面定位确定后定名；曾先后考虑 `desktop-ui-prototype`、`pc-ui-prototype`、`ui-prototype`）。未来的艺术类/表达类页面 skill 对应命名为 `expressive-ui-prototype`。
 
 架构端无关：五阶段流程对 PC 和移动端通用，设计知识按端拆参考文件，由 SKILL.md 按任务条件加载。v1 只写 PC 参考文件，移动端留接口后续补。
 
@@ -29,7 +29,7 @@
 ## 文件结构
 
 ```
-ui-prototype/
+task-ui-prototype/
 ├── SKILL.md                        # 触发描述 + 五阶段强制流程（端无关）
 ├── pc-design-reference.md          # PC 业务页设计判断（阶段 2/4 查阅）
 └── mobile-design-reference.md      # 移动端设计判断（v1 留空接口，后续补）
