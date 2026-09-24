@@ -1,6 +1,6 @@
 ---
 name: ui-prototype
-description: 设计并交付 PC 端或移动端的网页原型（工作台、后台、dashboard、列表/详情、分析页、表单页）。输入页面需求，产出可运行的 HTML 原型和对应视口的截图，含强制截图验收。不用于营销落地页和静态艺术图。Use when the user asks to design a PC dashboard/admin/workbench page prototype or a mobile web page prototype.
+description: 设计并交付 PC 端或移动端的任务型界面原型——工作台、后台、dashboard、列表/详情、分析页、表单、设置、消息中心、内容管理等，判断标准是页面的职责让人完成操作或获取信息。输入页面需求，产出可运行的 HTML 原型和对应视口的截图，含强制截图验收。不用于营销落地页和静态艺术图。Use when the user asks to design a task-oriented web UI prototype (dashboard, admin, workbench, list/detail, form, settings, content management, etc.) for desktop or mobile.
 ---
 
 # UI Prototype
@@ -9,8 +9,12 @@ description: 设计并交付 PC 端或移动端的网页原型（工作台、后
 
 ## 适用范围
 
-触发：PC 端或移动端的业务页面原型——工作台、后台、dashboard、列表/详情、分析页、表单页。
-不适用：营销落地页、静态艺术图（海报、PNG 画布）。遇到这些需求明确说明本 skill 不适用。
+触发：以完成任务为目的的界面型页面原型，PC 端或移动端均可——工作台、后台、dashboard、列表/详情、分析页、表单、设置、消息中心、个人中心、内容管理等。判断标准：页面的主要职责是让人完成操作或获取信息，而不是说服访客。
+
+不适用，遇到应明确说明并给出理由：
+
+- **营销落地页、品牌官网首页**：目标函数不同——落地页的杠杆是说服与转化（叙事节奏、视觉冲击、情绪表达），本 skill 的规范和验收清单全是任务效率导向，套用会产出"正确但平庸"的页面。后续可另设模式、配独立参考文件
+- **静态艺术图**（海报、PNG/PDF 画布）：交付物不是可运行网页，没有 DOM 和交互，截图验收与点击验证无从谈起，应使用画布类工具
 
 ## 加载参考文件
 
