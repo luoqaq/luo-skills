@@ -16,6 +16,8 @@
 
 说明用户、主要动作、页面清单、目标端/载体及已知风格倾向。载体的识别与默认规则见 [SKILL.md 阶段 1](task-ui-prototype/SKILL.md#1-明确输入)；双端任务分别按各端规范设计和验收。没有倾向时，默认先提供同一代表页的多个可运行方向稿；明确说“风格你来定，直接做”可委托 Agent 选择。
 
+支持从交互中积累 [个人偏好记忆](task-ui-prototype/preference-memory.md)：设计前读取，收到相关反馈后更新，区分长期倾向、当次选择和待确认推断。当次要求优先，也可说“忘记这条”“暂停记录”。个人记录保存在 Skill 内的 `memory/preferences.md`，默认不进入 Git；更新时保留、迁移时单独复制，分享 Skill 时排除。
+
 ## 目录
 
 ```text
@@ -26,6 +28,8 @@ task-ui-prototype/
 ├── mobile-visual-presets.md
 ├── task-patterns.md
 ├── visual-examples.md
+├── preference-memory.md
+├── memory/                        # 本地个人记录，按需创建，不随 Git 分发
 └── assets/examples/
     ├── stock-analysis/             # PC 历史案例
     └── mobile-styles/              # 移动端同题视觉样板
