@@ -1,0 +1,173 @@
+{
+  "normal": [
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "a",
+      "width": 320
+    },
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "b",
+      "width": 320
+    },
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "c",
+      "width": 320
+    },
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "a",
+      "width": 360
+    },
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "b",
+      "width": 360
+    },
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "c",
+      "width": 360
+    },
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "a",
+      "width": 390
+    },
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "b",
+      "width": 390
+    },
+    {
+      "inputFont": "16px",
+      "overflow": 0,
+      "recordCount": 8,
+      "smallButtons": [],
+      "statusFont": "14px",
+      "style": "c",
+      "width": 390
+    }
+  ],
+  "text200": [
+    {
+      "overflow": 0,
+      "overflowingText": [],
+      "statusFont": "28px",
+      "style": "a",
+      "width": 390
+    },
+    {
+      "overflow": 0,
+      "overflowingText": [],
+      "statusFont": "28px",
+      "style": "b",
+      "width": 390
+    },
+    {
+      "overflow": 0,
+      "overflowingText": [],
+      "statusFont": "28px",
+      "style": "c",
+      "width": 390
+    },
+    {
+      "overflow": 0,
+      "overflowingText": [],
+      "statusFont": "28px",
+      "style": "a",
+      "width": 320
+    },
+    {
+      "overflow": 0,
+      "overflowingText": [],
+      "statusFont": "28px",
+      "style": "b",
+      "width": 320
+    },
+    {
+      "overflow": 0,
+      "overflowingText": [],
+      "statusFont": "28px",
+      "style": "c",
+      "width": 320
+    }
+  ],
+  "flows": [
+    {
+      "style": "纸本目录",
+      "search": [
+        "直筒水洗牛仔裤DN2609032 色 / 4 尺码¥299 / 件启用"
+      ]
+    },
+    {
+      "style": "纸本目录",
+      "empty": true
+    },
+    {
+      "style": "纸本目录",
+      "cancelCount": 8
+    },
+    {
+      "style": "柔和工作台",
+      "search": [
+        "直筒水洗牛仔裤DN2609032 色 / 4 尺码¥299 / 件启用"
+      ]
+    },
+    {
+      "style": "柔和工作台",
+      "empty": true
+    },
+    {
+      "style": "柔和工作台",
+      "cancelCount": 8
+    },
+    {
+      "style": "机能终端",
+      "search": [
+        "直筒水洗牛仔裤DN2609032 色 / 4 尺码¥299 / 件启用"
+      ]
+    },
+    {
+      "style": "机能终端",
+      "empty": true
+    },
+    {
+      "style": "机能终端",
+      "cancelCount": 8
+    }
+  ]
+}

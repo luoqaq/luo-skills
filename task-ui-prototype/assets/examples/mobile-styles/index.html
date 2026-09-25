@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>移动端视觉预设 · 见山商品目录</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="assets/data.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <aside class="review-tools" aria-label="原型比较工具">
+    <div class="review-heading"><strong>移动端 · 视觉方向 R2</strong><a href="compare.html">并排 / 灰度</a></div>
+    <div class="directions" aria-label="切换设计方向">
+      <button data-direction="a" aria-pressed="true">纸本目录</button>
+      <button data-direction="b" aria-pressed="false">柔和工作台</button>
+      <button data-direction="c" aria-pressed="false">机能终端</button>
+    </div>
+    <p id="thesis"></p>
+    <label class="scale-control"><input id="text-scale" type="checkbox">文字 200% 检查</label>
+    <p class="review-footnote">同一份商品与功能 · 虚构演示数据 · 款式图非实拍</p>
+  </aside>
+  <div id="app" class="app direction-a">
+    <header class="store-header">
+      <span class="store-symbol" aria-hidden="true">见</span>
+      <div><strong>见山服饰</strong><span>文一路店</span></div>
+      <button class="icon-button" data-action="scope" aria-label="查看当前门店"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m8 10 4 4 4-4"/></svg></button>
+    </header>
+    <main id="main">
+      <div class="page-title"><div><p class="page-caption">门店经营 / 商品</p><h1>商品目录<span id="total">08</span></h1></div><button class="primary add-button" data-action="new"><span aria-hidden="true">＋</span> 新增</button></div>
+      <div class="search-region">
+        <form id="search-form" role="search"><label class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><input id="search" aria-label="搜索商品" placeholder="名称、编码或条码" autocomplete="off" type="search"></label></form>
+        <button class="filter-button" data-action="filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg><span id="filter-text">筛选</span></button>
+      </div>
+      <div id="status-tabs" class="status-tabs" aria-label="商品状态"></div>
+      <div class="results-head"><p id="result-summary" aria-live="polite"></p><button id="clear-filters" class="text-button" data-action="clear" hidden>清除条件</button><span class="illustration-note">款式示意</span></div>
+      <section id="products" aria-label="商品列表"></section>
+      <p class="list-end">已显示全部商品</p>
+    </main>
+    <nav class="bottom-nav" aria-label="主要导航">
+      <button data-action="home"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></svg><span>首页</span></button>
+      <button class="active" aria-current="page"><svg viewBox="0 0 24 24"><path d="m3 7 9-4 9 4v10l-9 4-9-4ZM3 7l9 5 9-5M12 12v9"/></svg><span>商品</span></button>
+      <button data-action="orders"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2ZM9 8h6M9 12h6"/></svg><span>订单</span></button>
+      <button data-action="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-3a8 8 0 0 1 16 0v3"/></svg><span>我的</span></button>
+    </nav>
+  </div>
+  <dialog id="sheet" aria-labelledby="sheet-title"><div class="sheet-top"><h2 id="sheet-title"></h2><button class="icon-button" data-action="close" aria-label="关闭面板">×</button></div><div id="sheet-content"></div></dialog>
+  <div id="toast" role="status"></div>
+</body>
+</html>
