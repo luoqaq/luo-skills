@@ -12,7 +12,7 @@ PC 历史案例，先形成本次主张再借鉴局部手法；名称来自 2026
 - **可调整项**：冷暖、强调色、导航形式、标题字体
 - **慎用**：高频操作页（大标题与留白挤占操作）
 - **审美记录**：已选定（投研总览 × PC × 当次呈现，2026-09-24）
-- **样板**：GPT/Codex 版 [a-editorial.html](assets/examples/stock-analysis/a-editorial.html)；Kimi 版 [journal.html](assets/examples/stock-analysis/kimi/journal.html)
+- **样板**：GPT/Codex 版 [a-editorial.html](../assets/examples/stock-analysis/a-editorial.html)；Kimi 版 [journal.html](../assets/examples/stock-analysis/kimi/journal.html)
 
 ### 精密终端
 
@@ -20,7 +20,7 @@ PC 历史案例，先形成本次主张再借鉴局部手法；名称来自 2026
 - **可调整项**：明暗主题、色板、面板数量、区块密度、终端质感强度
 - **慎用**：长时间阅读场景（须检查字阶、对比与特效负担）
 - **审美记录**：本次投研试跑的 Kimi 终端稿（未收录）在 2026-09-24 因刺眼、中规中矩被否决；不推广为整个风格、所有深色或其他使用者的禁用方向。浅色变体未测试
-- **样板**：GPT/Codex 版 [b-terminal.html](assets/examples/stock-analysis/b-terminal.html)
+- **样板**：GPT/Codex 版 [b-terminal.html](../assets/examples/stock-analysis/b-terminal.html)
 - **外部手法参考**：来自另一项目中用户认可的终端稿，不继承其业务内容或验证状态。深绿黑底（如 #0a120d）、柔和绿白正文（如 #c9ecd8）；荧光信号配分级辉光（小半径强、大半径弱）；装饰性标题字体与编程等宽正文分工，琥珀色作次级警示
 
 ### 现代账本
@@ -29,11 +29,11 @@ PC 历史案例，先形成本次主张再借鉴局部手法；名称来自 2026
 - **可调整项**：色相、色面位置、导航形式、汇总区比例
 - **慎用**：退化为普通后台（把连续列表悄悄换成卡片墙即失败）
 - **审美记录**：已有样稿（2026-09-24）
-- **样板**：GPT/Codex 版 [c-ledger.html](assets/examples/stock-analysis/c-ledger.html)；Kimi 版 [ledger.html](assets/examples/stock-analysis/kimi/ledger.html)
+- **样板**：GPT/Codex 版 [c-ledger.html](../assets/examples/stock-analysis/c-ledger.html)；Kimi 版 [ledger.html](../assets/examples/stock-analysis/kimi/ledger.html)
 
 ## 历史同题比较入口
 
-[对比页](assets/examples/stock-analysis/index.html)：同份演示数据，PC 底部切换器支持 URL 参数与键盘。新任务须用当次内容重做，移动端另行适配。
+[对比页](../assets/examples/stock-analysis/index.html)：同份演示数据，PC 底部切换器支持 URL 参数与键盘。新任务须用当次内容重做，移动端另行适配。
 
 ## 证据记录规则（新增证据时遵守）
 

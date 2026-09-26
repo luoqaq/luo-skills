@@ -13,7 +13,8 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
-EXAMPLES = ROOT / "task-ui-prototype/assets/examples"
+SKILLS = ROOT / "skills"
+EXAMPLES = SKILLS / "task-ui-prototype/assets/examples"
 ASSET_TYPES = {".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".woff2"}
 NOINDEX = '<meta name="robots" content="noindex,follow">'
 ROBOTS_META = re.compile(r'<meta\b[^>]*\bname=["\']robots["\'][^>]*>', re.I)
@@ -86,8 +87,8 @@ def load_skills():
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", key) or key in seen:
             raise ValueError(f"Skill 标识无效或重复：{key}")
         seen.add(key)
-        if not (ROOT / key / "SKILL.md").is_file():
-            raise ValueError(f"技能目录中不存在 {key}/SKILL.md")
+        if not (SKILLS / key / "SKILL.md").is_file():
+            raise ValueError(f"技能目录中不存在 skills/{key}/SKILL.md")
         for field in ("name", "subtitle", "category", "description", "prompt"):
             if not isinstance(skill[field], str) or not skill[field].strip():
                 raise ValueError(f"{key} 缺少有效的 {field}")
@@ -125,7 +126,7 @@ def render_skills(source, skills):
   <header class="skill-header">
     <div class="section-heading"><p class="eyebrow">SKILL {number:02} / {category}</p><a class="back-to-catalog" href="#skills">返回技能目录 ↑</a></div>
     <div class="skill-heading"><div><h2 id="title-{key}">{name}<span class="chinese-title">{subtitle}</span></h2><p class="skill-name"><code>{key}</code></p></div>
-    <div class="skill-summary"><p>{description}</p><a class="text-link" href="https://github.com/luoqaq/luo-skills/blob/main/{key}/SKILL.md">完整技能说明 ↗</a></div></div>
+    <div class="skill-summary"><p>{description}</p><a class="text-link" href="https://github.com/luoqaq/luo-skills/blob/main/skills/{key}/SKILL.md">完整技能说明 ↗</a></div></div>
   </header>
   {detail}
   <section class="skill-install" id="install-{key}" aria-labelledby="install-title-{key}" data-copy-group>

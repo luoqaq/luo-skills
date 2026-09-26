@@ -1,14 +1,17 @@
 # Luo Skills 技能目录的维护与发布
 
-这里是整个仓库的技能目录站模板，使用 GitHub Pages 发布到 <https://luoqaq.github.io/luo-skills/>。首页介绍技能集合；目录按任务分类，各 Skill 有独立介绍、可选示例和安装区。当前只有 `task-ui-prototype`，不显示尚不存在的技能。部署成功不代表搜索引擎已经收录。
+这里是整个仓库的技能目录站模板，使用 GitHub Pages 发布到 <https://luoqaq.github.io/luo-skills/>。首页介绍技能集合；目录按任务分类，各 Skill 有独立介绍、可选示例和安装区。当前包含 `task-ui-prototype` 和 `less-talk`，不显示尚不存在的技能。部署成功不代表搜索引擎已经收录。
 
 安装方式优先让 Agent 执行：首屏直接提供仓库安装请求，每个目录条目及技能详情提供只安装该 Skill 的请求，均可直接复制。终端命令折叠为备选。安装请求明确当前 Agent、个人级范围、已有 memory/ 保留和结果报告；不因新增 Skill 改为默认安装全部。维护时保留这些直接安装入口，不用纯说明或详情页跳转替代。
+
+技能源码位于 `skills/<skill-id>/`，各自包含 `SKILL.md` 及已有的 `references/`、`agents/`、`assets/`。`site/` 只维护展示，`scripts/` 负责校验与构建；完整安装与更新说明见 [docs/installation.md](../docs/installation.md)。
 
 ## 本地预览
 
 在仓库根目录执行，无需安装依赖（Python 3.9+）：
 
 ```sh
+python3 scripts/validate-skills.py
 python3 scripts/build-site.py --out /private/tmp/luo-skills-site
 python3 -m http.server 8770 --directory /private/tmp/luo-skills-site --bind 127.0.0.1
 ```
@@ -43,9 +46,9 @@ python3 scripts/build-site.py --out /private/tmp/luo-skills-release --base-url "
 构建脚本只复制这些内容：
 
 - `site/index.html`、`styles.css`、`main.js`；首页的目录、计数和各技能介绍由 `site/skills.json` 在构建时生成，浏览器禁用 JavaScript 仍可阅读。
-- 移动端三方案比较截图，作为 `assets/mobile-comparison.jpg`（源文件虽名为 `.png`，实际内容是 JPEG；构建只纠正输出扩展名）。
+- `skills/task-ui-prototype/assets/examples/mobile-styles/screenshots/comparison.png` 移动端三方案比较截图，作为 `assets/mobile-comparison.jpg`（源文件虽名为 `.png`，实际内容是 JPEG；构建只纠正输出扩展名）。
 - `site/assets/pc-preview.jpg` 是现有 PC 研究刊物样板的真实浏览器截图，用于首页 PC 预览。
-- `mobile-styles` 和 `stock-analysis` 根目录的 HTML / JS / CSS，以及各自 `assets/` 下的运行素材白名单。
+- `skills/task-ui-prototype/assets/examples/` 中 `mobile-styles` 和 `stock-analysis` 根目录的 HTML / JS / CSS，以及各自 `assets/` 下的运行素材白名单。
 
 不会复制整个仓库，不包含演示目录的 Markdown、JSON、截图目录、个人 `memory/` 或 `stock-analysis/kimi/`。只显式加入上述两张截图；技能清单与 HTML 片段是构建输入，不单独发布。
 
@@ -53,10 +56,10 @@ python3 scripts/build-site.py --out /private/tmp/luo-skills-release --base-url "
 
 新增技能时不改首页骨架：
 
-1. 先创建真实的 `<skill-id>/SKILL.md`；`id` 使用与安装名称一致的目录名。
+1. 先创建真实的 `skills/<skill-id>/SKILL.md`；`id` 使用与安装名称一致的目录名。参考文档放在该 Skill 的 `references/`，运行素材放在 `assets/`，宿主配置放在 `agents/`，按实际需要添加。
 2. 在 `site/skills.json` 末尾追加一项，填写 `id`、`name`、`subtitle`、`category`、`description`、`prompt`。构建会生成目录条目、技能标题、独立安装请求、备选终端命令和调用示例，并自动更新数量。分类写该技能真实用途。
 3. 如需专属展示，新增 `site/skills/<skill-id>.html`，并用 `detail` 指向它。该字段可省略；片段可展示文档、命令或其他成果，不要求有 PC / 移动端案例。片段里的 HTML id 用技能名作前缀，避免多个 Skill 冲突。
-4. 只有新增图片或演示资源时，才扩展 `scripts/build-site.py` 的发布白名单。随后重新构建并验证目录锚点、每项安装命令及新增交互；同步根 README 的技能列表。
+4. 只有新增图片或演示资源时，才扩展 `scripts/build-site.py` 的发布白名单。同步根 README 的技能列表，运行 `python3 scripts/validate-skills.py`，随后重新构建并验证目录锚点、每项安装命令及新增交互。
 
 `site/index.html` 只维护集合定位、目录容器与通用使用说明，不嵌入单一 Skill 的能力文案。现有 PC 三方向切换与移动端样板都在 `site/skills/task-ui-prototype.html` 内；复制反馈按各自安装区隔离。Skill 名称、description 和公开页面的能力边界保持一致。
 

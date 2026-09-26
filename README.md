@@ -2,139 +2,55 @@
 
 **按任务选择、独立安装的 Agent 技能库。**
 
-A growing collection of reusable Agent Skills, each with its own use cases, examples, and installation instructions.
-
 中文 · [English](README.en.md)
 
-当前提供 `task-ui-prototype`：面向 PC / 移动端后台、工作台和业务工具，先明确任务与页面范围，方向未定时比较视觉方案，再扩展可点击的网页原型。每个包含 `SKILL.md` 的目录是一项完整 Skill，连同参考和素材一起安装，可独立使用。
-
-[在线网站与案例](https://luoqaq.github.io/luo-skills/) · [让 Agent 安装](#方式一让-agent-用自然语言安装) · [使用示例](#安装后如何使用) · [本地预览](#预览样板) · [Skill 完整说明](task-ui-prototype/SKILL.md)
-
-![同一手机商品目录的三种视觉方向：纸本目录、柔和工作台、机能终端；保持商品、字段与交互一致](task-ui-prototype/assets/examples/mobile-styles/screenshots/comparison.png)
-
-同一个商品管理任务，比较字排、构图与控件语言。图中为仓库自带的移动端网页样板，使用演示数据与款式示意；三种方向是参考，不是固定菜单。
-
-## task-ui-prototype：适合用来做什么
-
-| 你的任务 | Skill 的工作 |
-|---|---|
-| 为后台、分析面板或工作台确认界面方向 | 选择有代表性的业务页面，在相同内容与操作下制作 2–3 个可运行方向稿，说明取舍 |
-| 把商品列表、详情、搜索筛选或表单串成流程 | 先建立基准页，再补齐约定页面、状态、主要操作与返回路径 |
-| 为手机网页、小程序或 App 探索交互 | 根据任务重排移动端信息和触控操作，以网页原型表达；明确宿主能力的模拟边界 |
-| 希望后续设计更贴合自己的反馈 | 在本地按场景记录设计偏好，支持纠正、遗忘和暂停，不把一次选择泛化为所有项目的风格 |
-
-**交付内容：** 可运行的原型源码、启动命令与运行地址、设计简报，以及截图/点击验收结果和未验证项。已有明确方向可直接做基准页；说“风格你来定，直接做”也可以委托 Agent 决定。
-
-这是设计与原型流程。网页里的演示数据、扫码或通知等宿主示意，不代表后端服务、真实账号、小程序或原生 App 已接通；营销落地页、静态艺术图不在该 Skill 范围内。实际验收覆盖取决于所用 Agent 的浏览器、截图和文件工具，缺失证据应明确列出。
+[在线网站与案例](https://luoqaq.github.io/luo-skills/) · [详细安装指南](docs/installation.md) · [本地预览](docs/installation.md#本地预览)
 
 ## 当前技能
 
-| Skill / 安装名称 | 用途 |
-|---|---|
-| [task-ui-prototype](task-ui-prototype/SKILL.md) | PC / 移动端任务型 UI 原型：比较视觉方向、扩展可点击页面、验收，并按场景积累个人设计偏好 |
+| Skill / 安装名称 | 适合的任务 | 主要能力 |
+|---|---|---|
+| [task-ui-prototype](skills/task-ui-prototype/SKILL.md) | PC / 移动端后台、工作台、列表详情和表单的 UI 原型 | 比较 2–3 个可运行视觉方向，扩展可点击流程并验收，按场景记录个人设计偏好 |
+| [less-talk](skills/less-talk/SKILL.md) | 日常问答、解释、建议、进度与结果汇报 | 先给结论，再给对应依据；按问题组织简短回答，保留必要事实、条件与步骤 |
 
-目前只有 **1 个 Skill**。下文多选方式适用于仓库后续增加技能；示例中的占位名称必须替换为实际存在的名称。移动端规范、视觉预设和样板都是 `task-ui-prototype` 的组成部分，不是单独安装的 Skill。
+目前有 **2 个 Skill**，都位于 `skills/<名称>/`。每个目录内的 `SKILL.md`、参考文档和素材构成一项完整 Skill，可独立安装；UI 规范、视觉预设和样板不是单独的 Skill。
 
-## 方式一：让 Agent 用自然语言安装
+`task-ui-prototype` 交付可运行网页原型、源码、启动方式、设计简报及验收结果。小程序与 App 也用网页表达；演示数据和宿主示意不代表真实服务或平台能力已接通。它不用于营销落地页或静态艺术图，缺失的浏览器、截图或点击验证会列为未验证项。
 
-把下面的话发给具备联网、终端和文件权限的 Agent。安装范围默认写清楚；如果目标是项目级，把“个人技能目录”改成“当前项目的技能目录”。这些话要求 Agent 执行安装，单独粘贴 GitHub 链接不代表已安装。
+`less-talk` 约束 AI 在对话中生成回答时的表达方式。简单事实或区别默认 1–3 句，没问做法不附教程，答清即停。需要展开时按“答案或结论 → 关键理由或证据 → 必要补充”组织，按解释、选择、操作、汇报调整；同一信息不重复改成表格或总结。从属依据或例子最多缩进一层。用户明确要求详细时展开。可单次调用，也可按[安装指南设为跨对话默认](docs/installation.md#less-talk-跨对话默认启用)；仅安装不代表每轮必用。
 
-**单个 Skill：**
+## 安装
+
+### 首推：让 Agent 安装
+
+把下面的话发给具备联网、终端和文件权限的 Agent；需要简洁回答技能时，将名称换成 `less-talk`：
 
 ```text
 请从 https://github.com/luoqaq/luo-skills 安装 task-ui-prototype，
-放到当前 Agent 的个人技能目录，只安装这一项。请按仓库 README 执行，
-已存在时先核对版本并保留我的 memory/；完成后报告实际安装路径和结果。
+放到当前 Agent 的个人技能目录，只安装这一项。
+请按 docs/installation.md 执行；已存在时先核对版本并保留我的 memory/，
+完成后报告实际安装路径和结果。
 ```
 
-**多个指定 Skill（替换为实际名称）：**
+需要项目级安装时，把“个人技能目录”改成“当前项目的技能目录”。单独粘贴仓库链接不代表已经安装。
 
-```text
-请从 https://github.com/luoqaq/luo-skills 安装这些 Skill：<名称一>、<名称二>。
-只安装名单内的项目，放到当前 Agent 的个人技能目录。
-先核对名称是否存在；已安装项保留个人 memory/，逐项报告安装结果。
-```
+### 备选：终端安装
 
-**先了解，再选择性安装：**
-
-```text
-请查看 https://github.com/luoqaq/luo-skills，列出可安装的 Skill 名称、用途和已安装状态。
-先不要安装，等我选择后，只把选中的项目装到当前 Agent 的个人技能目录。
-```
-
-Codex 也可以明确使用内置安装器：
-
-```text
-$skill-installer 请安装 https://github.com/luoqaq/luo-skills/tree/main/task-ui-prototype
-```
-
-Codex 内置安装器可从其他仓库安装 Skill，见 [OpenAI 官方说明](https://learn.chatgpt.com/docs/build-skills#install-curated-skills-for-local-use)。不同安装器的路径和更新行为可能不同，以实际输出为准；不要假定批量失败会自动回滚已成功的项。
-
-## 方式二：命令行安装
-
-使用第三方 [skills CLI](https://github.com/vercel-labs/skills#readme)，需要符合[安装器版本要求](https://github.com/vercel-labs/skills/blob/main/package.json)的 Node.js、npm 和 Git；首次运行 `npx` 可能下载该工具。以下以 **Codex 个人级安装**为例，已安装过同名技能时先看[更新与个人记忆](#更新与个人记忆)。
+以下使用第三方 [skills CLI](https://github.com/vercel-labs/skills#readme)，需要符合其[版本要求](https://github.com/vercel-labs/skills/blob/main/package.json)的 Node.js、npm 和 Git；首次运行 `npx` 可能下载工具。以 Codex 个人级安装为例：
 
 ```sh
-# 查看仓库有哪些技能，不安装技能
+# 查看可安装项
 npx skills add luoqaq/luo-skills --list
 
-# 只安装一个
+# 只安装指定技能；可将名称换成 less-talk
 npx skills add luoqaq/luo-skills --skill task-ui-prototype --agent codex -g
-
-# 交互选择要安装的技能；只有一个可选项时可能直接选中
-npx skills add luoqaq/luo-skills --agent codex -g
 ```
 
-一次安装多个：先从列表获取真实名称，再替换下面的占位符（当前仓库尚无第二项）。
+项目级安装先进入目标项目，再去掉 `-g`。已有同名技能时先备份个人 `memory/`；多个技能、其他 Agent、手动引入和更新步骤见[详细安装指南](docs/installation.md)。
 
-```text
-npx skills add luoqaq/luo-skills --skill <名称一> <名称二> --agent codex -g
-```
+## 使用示例
 
-如果明确需要安装仓库里的全部技能，仍限定目标 Agent：
-
-```sh
-npx skills add luoqaq/luo-skills --skill '*' --agent codex -g
-```
-
-- `-g` 表示个人级，跨项目使用；只给某个项目使用时，先进入目标项目根目录，再去掉 `-g`。
-- `--agent codex` 可替换为 `claude-code`、`cursor` 等[安装器支持的 Agent 名称](https://github.com/vercel-labs/skills#supported-agents)；也可明确列出多个目标 Agent。安装器支持不等于本仓库已在所有 Agent 上验收。
-- 不要把 `--all` 当成“只安装本仓库全部技能”：该参数还会选择所有 Agent 并跳过确认。按需选择 Skill 和目标 Agent 即可。
-
-## 方式三：手动引入
-
-下载仓库 ZIP 并解压，或克隆仓库：
-
-```sh
-git clone https://github.com/luoqaq/luo-skills.git
-cd luo-skills
-```
-
-从仓库选中需要的 Skill，复制**整个目录**到 Agent 的技能目录。保留 `.gitignore`、参考文档和 `assets/`，不要只复制 `SKILL.md`，也不要多套一层 `luo-skills/`。复制别人的本地副本时排除 `memory/`；Git 忽略不会阻止普通文件复制。
-
-以 Codex 为例，手动放置到 `~/.agents/skills/task-ui-prototype/` 可供个人跨项目使用；放到目标项目的 `.agents/skills/task-ui-prototype/` 则供该项目使用。目录依据 [Codex 官方说明](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills)；其他 Agent 按各自文档设置，不把 Codex 路径当作统一规范。
-
-对于 Git 克隆的仓库，也可在仓库根目录执行以下命令（macOS / Linux / Git Bash）。它导出已提交的完整 Skill，不携带本地未跟踪的个人记忆，已有目标会跳过：
-
-```sh
-skill_dest="$HOME/.agents/skills"
-mkdir -p "$skill_dest"
-for skill_name in task-ui-prototype; do
-  if [ -e "$skill_dest/$skill_name" ] || [ -L "$skill_dest/$skill_name" ]; then
-    printf '跳过已存在的 Skill：%s；更新请先保留 memory/。\n' "$skill_name"
-  else
-    git archive HEAD "$skill_name" | tar -x -C "$skill_dest"
-  fi
-done
-```
-
-只引入一个就保留一个目录名；引入多个时在 `for skill_name in` 后列出选中的实际目录名，以空格分隔。项目级安装则把 `skill_dest` 换成**目标项目**的 `.agents/skills` 绝对路径。ZIP 解压目录没有 Git 元数据，使用普通整目录复制即可。
-
-## 安装后如何使用
-
-先确认实际安装路径内存在 `SKILL.md` 及参考、素材。Codex 会自动发现技能变化；若下一轮仍未出现，再重启，见 [官方加载说明](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills)。不要在多个技能目录里重复安装同名副本。
-
-在任务中明确指定 Skill，最容易确认是否被采用：
+**任务型 UI 原型：**
 
 ```text
 使用 task-ui-prototype，为服装门店管理员设计手机网页原型。
@@ -142,52 +58,14 @@ done
 暂无风格偏好，先给 2–3 个可运行方向稿。
 ```
 
-Codex 可在开头写 `$task-ui-prototype`。其他 Agent 的显式调用语法以其文档为准。说明用户、主要动作、页面清单、目标端/载体和已知风格倾向；明确说“风格你来定，直接做”可委托 Agent 选择。
+已有明确方向可以直接做基准页；说“风格你来定，直接做”可委托 Agent 决定。
 
-**只想临时使用，不安装：** 将仓库放在 Agent 可读取的位置，然后指定实际路径：
+**Less Talk · 简洁回答：**
 
 ```text
-请读取并遵循 /实际路径/luo-skills/task-ui-prototype/SKILL.md，
-按需读取其相对引用的参考与素材，只用于本次 UI 原型任务。不要安装。
+使用 $less-talk 回答：Git 的 commit 和 push 有什么区别？
 ```
 
-这种方式不保证后续任务自动发现；个人记忆写在本次实际加载的 Skill 目录，临时目录删除后不会自动保留。安装多个 Skill 也不代表每个任务都要读取全部，按任务指定需要的名称和分工即可。
+也可以说：“这次对话按 less-talk 的规则回答，先给结论，省掉铺垫和重复，必要细节保留。”Codex 可用 `$task-ui-prototype`、`$less-talk` 显式调用；其他 Agent 的语法以其文档为准。
 
-## 更新与个人记忆
-
-`task-ui-prototype` 会按 [偏好记忆规则](task-ui-prototype/preference-memory.md) 在本地创建 `memory/preferences.md`；通用规则随仓库分发，个人记录不进入 Git。可以说“忘记这条”“暂停记录”或“这次不要参考历史”。
-
-更新或重装前，将同一使用者的 `memory/` 备份到**安装目录之外**，核对实际加载位置（包括软链接目标），再更新通用文件并恢复记录。部分安装器会替换整个目录，不能依赖 Git 忽略来保护记忆；内置安装器也不一定支持覆盖更新。
-
-不同使用者各自安装，分享时排除个人记录；多个独立副本不会自动同步。没有写权限时只能在本次任务采用反馈，Agent 应明确告知未持久保存。
-
-## 预览样板
-
-以下命令在仓库根目录执行，样板使用演示数据。`127.0.0.1` 地址只供运行命令的本机访问，不是公开在线演示。
-
-**介绍页与样板入口：**
-
-```sh
-python3 scripts/build-site.py --out /private/tmp/luo-skills-site
-python3 -m http.server 8770 --bind 127.0.0.1 --directory /private/tmp/luo-skills-site
-```
-
-输出目录须不存在或为空；重复构建时换一个目录，并同步修改启动命令中的目录。构建不会删除或覆盖已有文件。
-
-打开 [本地介绍页](http://127.0.0.1:8770/)。介绍页源文件为 [site/index.html](site/index.html)，构建时打包现有样板；此命令只生成并预览文件，不会发布网站。
-
-**也可分别运行样板：**
-
-```sh
-# PC 历史案例
-python3 -m http.server 8766 --bind 127.0.0.1 --directory task-ui-prototype/assets/examples/stock-analysis
-```
-
-打开 [PC 案例对比](http://127.0.0.1:8766/index.html)。
-
-```sh
-# 移动端同题视觉样板
-python3 -m http.server 8769 --bind 127.0.0.1 --directory task-ui-prototype/assets/examples/mobile-styles
-```
-
-打开 [单屏切换](http://127.0.0.1:8769/) 或 [并排比较](http://127.0.0.1:8769/compare.html)。移动端规则与验收状态见 [mobile-visual-presets.md](task-ui-prototype/mobile-visual-presets.md)；网页原型不代表真机、小程序或 App 宿主验证通过。
+查看[在线网站与案例](https://luoqaq.github.io/luo-skills/)，或按[本地预览步骤](docs/installation.md#本地预览)运行现有样板。网站维护与构建说明见 [site/README.md](site/README.md)。

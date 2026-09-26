@@ -1,0 +1,4 @@
+interface:
+  display_name: "Less Talk · 简洁回答"
+  short_description: "让 AI 先给结论、再给对应依据，按问题组织简短回答，保留必要细节"
+  default_prompt: "这次对话使用 $less-talk：先给结论，再给必要依据，按问题组织简短回答。"
