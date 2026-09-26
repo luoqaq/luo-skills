@@ -6,6 +6,8 @@ A growing collection of Agent Skills, each with its own use cases, examples, and
 
 [中文](README.md) · English
 
+[Website and live examples](https://luoqaq.github.io/luo-skills/) · [Install with your Agent](#recommended-ask-your-agent)
+
 The repository currently contains **one Skill**, [`task-ui-prototype`](task-ui-prototype/SKILL.md). It guides an Agent from task and page scope to visual direction, a reference page, an interactive web prototype, and verification. Design references, visual presets, and examples ship with this Skill; they are not separate installs.
 
 ![Three visual directions for the same mobile product catalog: editorial paper, soft workbench, and utility terminal, using matching content and interactions](task-ui-prototype/assets/examples/mobile-styles/screenshots/comparison.png)

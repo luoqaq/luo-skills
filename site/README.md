@@ -1,6 +1,6 @@
 # Luo Skills 技能目录的维护与发布
 
-这里是整个仓库的技能目录站模板。当前仍是本地交付，**尚未发布，也未验证搜索引擎收录**。首页介绍技能集合；目录按任务分类，各 Skill 有独立介绍、可选示例和安装区。当前只有 `task-ui-prototype`，不显示尚不存在的技能。
+这里是整个仓库的技能目录站模板，使用 GitHub Pages 发布到 <https://luoqaq.github.io/luo-skills/>。首页介绍技能集合；目录按任务分类，各 Skill 有独立介绍、可选示例和安装区。当前只有 `task-ui-prototype`，不显示尚不存在的技能。部署成功不代表搜索引擎已经收录。
 
 安装方式优先让 Agent 执行：首屏直接提供仓库安装请求，每个目录条目及技能详情提供只安装该 Skill 的请求，均可直接复制。终端命令折叠为备选。安装请求明确当前 Agent、个人级范围、已有 memory/ 保留和结果报告；不因新增 Skill 改为默认安装全部。维护时保留这些直接安装入口，不用纯说明或详情页跳转替代。
 
@@ -18,6 +18,8 @@ python3 -m http.server 8770 --directory /private/tmp/luo-skills-site --bind 127.
 默认构建保留介绍页的 `noindex,follow`，不生成 canonical、正式网址或 sitemap。脚本结束会检查 HTML、CSS、JS 中可静态识别的本地资源引用；实际布局、交互和外链仍需浏览器验证。
 
 ## 生成待发布文件
+
+`.github/workflows/pages.yml` 在推送到 `main` 时自动构建并部署，也可在 GitHub Actions 手动运行。构建沿用下述白名单，仅上传生成目录；正式地址由 Pages 配置提供。构建失败不会进入部署步骤。发布状态以 Actions 的部署结果及公开网址检查为准。
 
 先确认部署平台和真实正式网址，再把地址传入 `--base-url`；支持 GitHub Pages 一类带子路径的网址。下面的地址变量必须替换为已确认的正式地址：
 

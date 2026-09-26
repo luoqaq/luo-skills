@@ -8,7 +8,7 @@ A growing collection of reusable Agent Skills, each with its own use cases, exam
 
 当前提供 `task-ui-prototype`：面向 PC / 移动端后台、工作台和业务工具，先明确任务与页面范围，方向未定时比较视觉方案，再扩展可点击的网页原型。每个包含 `SKILL.md` 的目录是一项完整 Skill，连同参考和素材一起安装，可独立使用。
 
-[让 Agent 安装](#方式一让-agent-用自然语言安装) · [使用示例](#安装后如何使用) · [本地预览](#预览样板) · [Skill 完整说明](task-ui-prototype/SKILL.md)
+[在线网站与案例](https://luoqaq.github.io/luo-skills/) · [让 Agent 安装](#方式一让-agent-用自然语言安装) · [使用示例](#安装后如何使用) · [本地预览](#预览样板) · [Skill 完整说明](task-ui-prototype/SKILL.md)
 
 ![同一手机商品目录的三种视觉方向：纸本目录、柔和工作台、机能终端；保持商品、字段与交互一致](task-ui-prototype/assets/examples/mobile-styles/screenshots/comparison.png)
 
