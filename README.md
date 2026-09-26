@@ -1,6 +1,31 @@
 # Luo Skills
 
-可复用的 Agent 技能。每个包含 `SKILL.md` 的目录是一项完整 Skill，连同参考和素材一起安装，可独立使用。
+**按任务选择、独立安装的 Agent 技能库。**
+
+A growing collection of reusable Agent Skills, each with its own use cases, examples, and installation instructions.
+
+中文 · [English](README.en.md)
+
+当前提供 `task-ui-prototype`：面向 PC / 移动端后台、工作台和业务工具，先明确任务与页面范围，方向未定时比较视觉方案，再扩展可点击的网页原型。每个包含 `SKILL.md` 的目录是一项完整 Skill，连同参考和素材一起安装，可独立使用。
+
+[让 Agent 安装](#方式一让-agent-用自然语言安装) · [使用示例](#安装后如何使用) · [本地预览](#预览样板) · [Skill 完整说明](task-ui-prototype/SKILL.md)
+
+![同一手机商品目录的三种视觉方向：纸本目录、柔和工作台、机能终端；保持商品、字段与交互一致](task-ui-prototype/assets/examples/mobile-styles/screenshots/comparison.png)
+
+同一个商品管理任务，比较字排、构图与控件语言。图中为仓库自带的移动端网页样板，使用演示数据与款式示意；三种方向是参考，不是固定菜单。
+
+## task-ui-prototype：适合用来做什么
+
+| 你的任务 | Skill 的工作 |
+|---|---|
+| 为后台、分析面板或工作台确认界面方向 | 选择有代表性的业务页面，在相同内容与操作下制作 2–3 个可运行方向稿，说明取舍 |
+| 把商品列表、详情、搜索筛选或表单串成流程 | 先建立基准页，再补齐约定页面、状态、主要操作与返回路径 |
+| 为手机网页、小程序或 App 探索交互 | 根据任务重排移动端信息和触控操作，以网页原型表达；明确宿主能力的模拟边界 |
+| 希望后续设计更贴合自己的反馈 | 在本地按场景记录设计偏好，支持纠正、遗忘和暂停，不把一次选择泛化为所有项目的风格 |
+
+**交付内容：** 可运行的原型源码、启动命令与运行地址、设计简报，以及截图/点击验收结果和未验证项。已有明确方向可直接做基准页；说“风格你来定，直接做”也可以委托 Agent 决定。
+
+这是设计与原型流程。网页里的演示数据、扫码或通知等宿主示意，不代表后端服务、真实账号、小程序或原生 App 已接通；营销落地页、静态艺术图不在该 Skill 范围内。实际验收覆盖取决于所用 Agent 的浏览器、截图和文件工具，缺失证据应明确列出。
 
 ## 当前技能
 
@@ -10,38 +35,7 @@
 
 目前只有 **1 个 Skill**。下文多选方式适用于仓库后续增加技能；示例中的占位名称必须替换为实际存在的名称。移动端规范、视觉预设和样板都是 `task-ui-prototype` 的组成部分，不是单独安装的 Skill。
 
-## 方式一：命令行安装
-
-使用第三方 [skills CLI](https://github.com/vercel-labs/skills#readme)，需要符合[安装器版本要求](https://github.com/vercel-labs/skills/blob/main/package.json)的 Node.js、npm 和 Git；首次运行 `npx` 可能下载该工具。以下以 **Codex 个人级安装**为例，已安装过同名技能时先看[更新与个人记忆](#更新与个人记忆)。
-
-```sh
-# 查看仓库有哪些技能，不安装技能
-npx skills add luoqaq/luo-skills --list
-
-# 只安装一个
-npx skills add luoqaq/luo-skills --skill task-ui-prototype --agent codex -g
-
-# 交互选择要安装的技能；只有一个可选项时可能直接选中
-npx skills add luoqaq/luo-skills --agent codex -g
-```
-
-一次安装多个：先从列表获取真实名称，再替换下面的占位符（当前仓库尚无第二项）。
-
-```text
-npx skills add luoqaq/luo-skills --skill <名称一> <名称二> --agent codex -g
-```
-
-如果明确需要安装仓库里的全部技能，仍限定目标 Agent：
-
-```sh
-npx skills add luoqaq/luo-skills --skill '*' --agent codex -g
-```
-
-- `-g` 表示个人级，跨项目使用；只给某个项目使用时，先进入目标项目根目录，再去掉 `-g`。
-- `--agent codex` 可替换为 `claude-code`、`cursor` 等[安装器支持的 Agent 名称](https://github.com/vercel-labs/skills#supported-agents)；也可明确列出多个目标 Agent。安装器支持不等于本仓库已在所有 Agent 上验收。
-- 不要把 `--all` 当成“只安装本仓库全部技能”：该参数还会选择所有 Agent 并跳过确认。按需选择 Skill 和目标 Agent 即可。
-
-## 方式二：让 Agent 用自然语言安装
+## 方式一：让 Agent 用自然语言安装
 
 把下面的话发给具备联网、终端和文件权限的 Agent。安装范围默认写清楚；如果目标是项目级，把“个人技能目录”改成“当前项目的技能目录”。这些话要求 Agent 执行安装，单独粘贴 GitHub 链接不代表已安装。
 
@@ -75,6 +69,37 @@ $skill-installer 请安装 https://github.com/luoqaq/luo-skills/tree/main/task-u
 ```
 
 Codex 内置安装器可从其他仓库安装 Skill，见 [OpenAI 官方说明](https://learn.chatgpt.com/docs/build-skills#install-curated-skills-for-local-use)。不同安装器的路径和更新行为可能不同，以实际输出为准；不要假定批量失败会自动回滚已成功的项。
+
+## 方式二：命令行安装
+
+使用第三方 [skills CLI](https://github.com/vercel-labs/skills#readme)，需要符合[安装器版本要求](https://github.com/vercel-labs/skills/blob/main/package.json)的 Node.js、npm 和 Git；首次运行 `npx` 可能下载该工具。以下以 **Codex 个人级安装**为例，已安装过同名技能时先看[更新与个人记忆](#更新与个人记忆)。
+
+```sh
+# 查看仓库有哪些技能，不安装技能
+npx skills add luoqaq/luo-skills --list
+
+# 只安装一个
+npx skills add luoqaq/luo-skills --skill task-ui-prototype --agent codex -g
+
+# 交互选择要安装的技能；只有一个可选项时可能直接选中
+npx skills add luoqaq/luo-skills --agent codex -g
+```
+
+一次安装多个：先从列表获取真实名称，再替换下面的占位符（当前仓库尚无第二项）。
+
+```text
+npx skills add luoqaq/luo-skills --skill <名称一> <名称二> --agent codex -g
+```
+
+如果明确需要安装仓库里的全部技能，仍限定目标 Agent：
+
+```sh
+npx skills add luoqaq/luo-skills --skill '*' --agent codex -g
+```
+
+- `-g` 表示个人级，跨项目使用；只给某个项目使用时，先进入目标项目根目录，再去掉 `-g`。
+- `--agent codex` 可替换为 `claude-code`、`cursor` 等[安装器支持的 Agent 名称](https://github.com/vercel-labs/skills#supported-agents)；也可明确列出多个目标 Agent。安装器支持不等于本仓库已在所有 Agent 上验收。
+- 不要把 `--all` 当成“只安装本仓库全部技能”：该参数还会选择所有 Agent 并跳过确认。按需选择 Skill 和目标 Agent 即可。
 
 ## 方式三：手动引入
 
@@ -138,7 +163,20 @@ Codex 可在开头写 `$task-ui-prototype`。其他 Agent 的显式调用语法�
 
 ## 预览样板
 
-以下命令在仓库根目录执行，样板使用演示数据。
+以下命令在仓库根目录执行，样板使用演示数据。`127.0.0.1` 地址只供运行命令的本机访问，不是公开在线演示。
+
+**介绍页与样板入口：**
+
+```sh
+python3 scripts/build-site.py --out /private/tmp/luo-skills-site
+python3 -m http.server 8770 --bind 127.0.0.1 --directory /private/tmp/luo-skills-site
+```
+
+输出目录须不存在或为空；重复构建时换一个目录，并同步修改启动命令中的目录。构建不会删除或覆盖已有文件。
+
+打开 [本地介绍页](http://127.0.0.1:8770/)。介绍页源文件为 [site/index.html](site/index.html)，构建时打包现有样板；此命令只生成并预览文件，不会发布网站。
+
+**也可分别运行样板：**
 
 ```sh
 # PC 历史案例

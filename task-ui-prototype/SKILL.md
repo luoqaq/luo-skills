@@ -1,6 +1,6 @@
 ---
 name: task-ui-prototype
-description: 设计 PC/移动端任务型界面的可运行网页原型，如后台、工作台、列表详情、分析和表单。方向未定时先比较同题视觉稿，选定后扩展并截图、点击验收；从反馈中记忆个人设计偏好。不用于营销落地页或静态艺术图。
+description: 设计 PC/移动端任务型 UI 的可运行网页原型：后台、工作台、仪表盘、列表详情和表单。用于 UI 原型设计、视觉方向比较、可点击交互稿；选定方向后扩展并截图、点击验收，记忆个人偏好。Build runnable desktop/mobile UI prototypes for admin dashboards and task workflows, with visual direction exploration and interactive mockups. 不用于营销落地页或静态艺术图。
 ---
 
 # Task UI Prototype

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "task-ui-prototype",
+    "name": "Task UI Prototype",
+    "subtitle": "任务型界面原型",
+    "category": "设计与原型",
+    "description": "为 PC 与移动端业务工具比较视觉方向，制作可点击原型，并完成截图与操作验收。",
+    "detail": "skills/task-ui-prototype.html",
+    "prompt": "使用 $task-ui-prototype，为服装门店管理员设计手机网页原型。\n只做首页、商品列表、商品详情。按全新项目设计，不参考现有 UI。\n暂无风格偏好，先给 2–3 个可运行方向稿。"
+  }
+]
